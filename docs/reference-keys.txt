@@ -6,6 +6,7 @@ plots-the-stratas-distribution
 multilevels-models-simple-example---binary-outcome
 description
 the-null-model-only-strata
+the-variance-change
 multilevels-models-simple-example---continous-outcome
 description-1
 the-null-model-only-strata-1

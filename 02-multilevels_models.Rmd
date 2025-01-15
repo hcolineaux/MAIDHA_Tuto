@@ -38,7 +38,7 @@ mydata %>%
 The null model allows us to estimate the IntraClass correlation (ICC), also known as the Variance Partition Coefficient (VPC), that is the part of the outcome variance that can be explained by the strata.
 
 
-```{r models_1}
+```{r models_1,  message=FALSE, warning=FALSE}
 
 # multilevel model
 m_null <- glmmTMB(Qualification ~ 1 + (1 | strata),
@@ -51,7 +51,7 @@ sjPlot::plot_model(m_null, type = "diag")
 ```
 
 Outputs of the models: 
-```{r}
+```{r output 1, message=FALSE, warning=FALSE}
 summary(m_null)
 
 # get the variances:
@@ -66,7 +66,7 @@ ICC_intersect
 
 Plot of the predicted values by strata:
 
-```{r}
+```{r plot 1, message=FALSE, warning=FALSE}
 #plot
 predictions <- predict_response(
       m_null,
@@ -84,13 +84,13 @@ predictions <- predict_response(
             ggplot(aes(x=predicted, y=fct_reorder(x,predicted,.fun='median'),
                        color = sex, linetype = ethnicity))+
             geom_point(size=3) +
-            geom_linerange(aes(xmin = conf.low, xmax = conf.high, size = Age))+
+            geom_linerange(aes(xmin = conf.low, xmax = conf.high, size = age))+
             labs( y = "Sratas", 
                   x = "",
                   color = "Sex Category",
                   linetype = "Ethnicity",
                   size = "Age",
-                  title = paste("Predicted values for",list_label[k]))+
+                  title = paste("Predicted values for having a low qualification"))+
             theme(axis.title = element_text(size = 10),
                   axis.text=element_text(size=10)))+ 
             scale_size_discrete(range = c(0.5, 1.5))
@@ -103,7 +103,7 @@ predictions <- predict_response(
 To calculate the (additive) contribution of each category to the total variance, we can estimate the variance change when adjusting for this category. The Proportional Variance Change (PVC) when adjusting for all categories is the portion of ICC/VPC explained by additive effect. Therefore 100% - PVC is the part explained by an intersectional effect .
 
 
-```{r}
+```{r outputs 2,  message=FALSE, warning=FALSE}
 
 # models where we add each category one by one
 m_gender <- glmmTMB(Qualification ~ Sex + (1 | strata), data = mydata, family=binomial)
@@ -132,10 +132,10 @@ prop_intersection <- round(100 - prop_full,2)
 
 print(
   as.data.frame(
-    c("ICC/VPC", "% Sex category", "% Age/generation", "% Ethnicity", "%Intersection"),
-    c(ICC_intersect,prop_gender, prop_age, prop_ethnicity,prop_intersection )
-  )
-)
+    cbind(
+    parameters = c("ICC/VPC", "% Sex category", "% Age/generation", "% Ethnicity", "%Intersection"),
+    values = c(ICC_intersect,prop_gender, prop_age, prop_ethnicity,prop_intersection )
+  )))
 
 
 ```
