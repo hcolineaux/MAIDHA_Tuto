@@ -1,0 +1,27 @@
+--- 
+title: "MAIDHA | Very detailed examples"
+author: "H. Colineaux"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+documentclass: book
+bibliography: book.bib
+site: bookdown::bookdown_site
+always_allow_html: true
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a very detailed example of using the MAIDHA approach to describe
+  intersectional phenomenon in biology and health.
+---
+
+# About
+
+We were largely inspired by the work of Evans et al (for example: @evans2024tutorial) and the vignette in the [ggeffects]:https://strengejacke.github.io/ggeffects/articles/practical_intersectionality.html package.
+
+
+[Licence]:https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+![](img/by-nc-sa.png){width=10%}
+
+The online version of this book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][Licence]. 
+
+
+

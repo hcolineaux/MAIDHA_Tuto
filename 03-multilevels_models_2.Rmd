@@ -1,0 +1,65 @@
+# Multilevels models: Simple example - continous outcome
+
+
+## Description
+
+```{r, message=FALSE, warning=FALSE}
+
+mydata$AgeEducEnd_class <- as.factor(ifelse(mydata$AgeEducEnd < mean(mydata$AgeEducEnd),
+                                                                     "Below mean", "Above mean"))
+table1::table1(~ Sex + Age_class + Ethnicity | AgeEducEnd_class,
+       data=mydata,
+    overall=c(left="Total"),
+    caption="Description by age of education end")
+
+```
+
+```{r message=FALSE, warning=FALSE}
+ggplot(data = mydata) +
+  geom_boxplot(aes(x = fct_reorder(strata,AgeEducEnd,.fun='median'),
+           y = AgeEducEnd),outlier.shape = NA) +
+  geom_smooth(aes(x = as.numeric(fct_reorder(strata,AgeEducEnd,.fun='median')),
+           y = AgeEducEnd)) +
+  labs(x = "Stratas", y = "Age of education end") +
+  theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))+
+  scale_y_continuous(limits = c(12,22))
+
+```
+
+
+## The null model (only strata) 
+
+```{r models_2}
+
+# multilevel model
+m_null <- glmmTMB(Qualification ~ 1 + (1 | strata),
+                  data = mydata,
+                  family = binomial)
+
+# intercept varies according to the stratum
+sjPlot::plot_model(m_null, type = "diag")
+
+
+ggplot(data = mydata) +
+  geom_jitter(aes(x = fct_reorder(strata,as.numeric(Qualification),.fun='median'),
+           y = as.numeric(Qualification)-1)) +
+  geom_smooth(aes(x = as.numeric(fct_reorder(strata,as.numeric(Qualification),.fun='median')),
+           y = as.numeric(Qualification)-1)) +
+  labs(x = "Stratas", y = "Low Qualification") +
+  theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))
+
+
+
+```
+
+```{r}
+
+# models where we add each category one by one
+m_gender <- glmmTMB(Qualification ~ Sex + (1 | strata), data = mydata, family=binomial)
+m_ethnicity <- glmmTMB(Qualification ~ Ethnicity + (1 | strata), data = mydata, family=binomial)
+m_age <- glmmTMB(Qualification ~ Age_class + (1 | strata), data = mydata, family=binomial)
+
+
+
+```
+
