@@ -199,6 +199,12 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="more-complexe-example---binary-outcome.html"><a href="more-complexe-example---binary-outcome.html#the-null-model-only-strata-2"><i class="fa fa-check"></i><b>5.2</b> The null model (only strata)</a></li>
 <li class="chapter" data-level="5.3" data-path="more-complexe-example---binary-outcome.html"><a href="more-complexe-example---binary-outcome.html#the-variance-change-2"><i class="fa fa-check"></i><b>5.3</b> The variance change</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="more-complexe-example---quantitative-outcome.html"><a href="more-complexe-example---quantitative-outcome.html"><i class="fa fa-check"></i><b>6</b> More complexe example - quantitative outcome</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="more-complexe-example---quantitative-outcome.html"><a href="more-complexe-example---quantitative-outcome.html#description-3"><i class="fa fa-check"></i><b>6.1</b> Description</a></li>
+<li class="chapter" data-level="6.2" data-path="more-complexe-example---quantitative-outcome.html"><a href="more-complexe-example---quantitative-outcome.html#the-null-model-only-strata-3"><i class="fa fa-check"></i><b>6.2</b> The null model (only strata)</a></li>
+<li class="chapter" data-level="6.3" data-path="more-complexe-example---quantitative-outcome.html"><a href="more-complexe-example---quantitative-outcome.html#the-variance-change-3"><i class="fa fa-check"></i><b>6.3</b> The variance change</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -302,7 +308,7 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<p>We can plot the observed probability.</p>
+<p>We can plot the observed means by strata.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="simple-example---continous-outcome.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/plot_12_quanti.jpeg&quot;</span>,</span>
 <span id="cb32-2"><a href="simple-example---continous-outcome.html#cb32-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
 <span id="cb32-3"><a href="simple-example---continous-outcome.html#cb32-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span> </span>
@@ -312,7 +318,7 @@ div.csl-indent {
 <span id="cb32-7"><a href="simple-example---continous-outcome.html#cb32-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span>value)) <span class="sc">+</span></span>
 <span id="cb32-8"><a href="simple-example---continous-outcome.html#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
 <span id="cb32-9"><a href="simple-example---continous-outcome.html#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Stratas&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Age of Education End&quot;</span>,</span>
-<span id="cb32-10"><a href="simple-example---continous-outcome.html#cb32-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">&quot;Observed mean by stratas&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-10"><a href="simple-example---continous-outcome.html#cb32-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">&quot;Observed means by stratas&quot;</span>) <span class="sc">+</span></span>
 <span id="cb32-11"><a href="simple-example---continous-outcome.html#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,  <span class="at">vjust=</span><span class="dv">1</span>,  <span class="at">hjust=</span><span class="dv">1</span>))</span>
 <span id="cb32-12"><a href="simple-example---continous-outcome.html#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 <pre><code>## png 

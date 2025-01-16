@@ -22,3 +22,7 @@ more-complexe-example---binary-outcome
 description-2
 the-null-model-only-strata-2
 the-variance-change-2
+more-complexe-example---quantitative-outcome
+description-3
+the-null-model-only-strata-3
+the-variance-change-3

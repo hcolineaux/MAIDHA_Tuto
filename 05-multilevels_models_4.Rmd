@@ -1,0 +1,176 @@
+# More complexe example - quantitative outcome
+
+As a working example, we want to explore intersectional inequalities in loneliness by  intersectional strata (48 stratas).
+
+## Description
+
+We can start by describe the outcome by strata.
+
+```{r message=FALSE, warning=FALSE}
+mydata$AirPoll_PM10d_class <- as.factor(ifelse(mydata$AirPoll_PM10 < mean(mydata$AirPoll_PM10),
+                                                                     "Below mean", "Above mean"))
+
+table1::table1(~ Sex + Age_class + Ethnicity +
+                 Qualification + Urban | AirPoll_PM10d_class,
+       data=mydata,
+    overall=c(left="Total"),
+    caption="Description by air pollution")
+
+```
+
+We can plot the observed means by strata.
+
+```{r plot_12_quanti_2}
+jpeg("img/plot_12_quanti_2.jpeg",
+         width = 1200, height = "800")
+mydata %>% 
+  group_by(strata_2) %>% 
+  mutate(value = mean(AirPoll_PM10)) %>% 
+  filter(Loneliness == "Yes") %>% 
+  ggplot(aes(x = fct_reorder(strata,value,.fun='median'),
+             y =value)) +
+    geom_point()  +
+    labs(x = "Stratas", y = "Air pollution (pm 10)",
+         title = "Observed means by stratas") +
+  theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))
+dev.off()
+
+```
+![](img/plot_12_quanti_2.jpeg)
+
+
+## The null model (only strata) 
+
+The null model allows us to estimate the IntraClass correlation (ICC), also known as the Variance Partition Coefficient (VPC), that is the part of the outcome variance that can be explained by the strata.
+
+
+```{r models_1_quanti_2,  message=FALSE, warning=FALSE}
+
+# multilevel model
+m_null <- glmmTMB(AirPoll_PM10 ~ 1 + (1 | strata_2),
+                  data = mydata)
+
+```
+
+Outputs of the models: 
+
+```{r output_1_quanti_2, message=FALSE, warning=FALSE}
+summary(m_null)
+
+# get the variances:
+v_null <- get_variance(m_null)
+# between stratas variance:
+v_null$var.random
+# intraclass correlation 
+ICC_intersect <- round(icc(m_null)$ICC_unadjusted*100, 2)
+ICC_intersect
+
+```
+
+Plot of the predicted values by strata:
+
+```{r plot_1_quanti_2, message=FALSE, warning=FALSE}
+#plot
+predictions <- predict_response(
+      m_null,
+      c("strata_2"),
+      type = "random") 
+    predictions <- predictions %>% 
+      arrange(predicted) 
+    predictions$rown = rownames(predictions)
+    predictions$x_lab <- paste0(predictions$rown,".",predictions$x)
+    predictions$sex <- as.factor(ifelse(grepl("Men", predictions$x), "Men", "Women"))
+    predictions$ethnicity <- as.factor(ifelse(grepl("Non White", predictions$x), "Non white", "White"))
+    predictions$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
+                           ifelse(grepl("-50", df$x), "-50","51-60")))
+    predictions$qualification <- as.factor(ifelse(grepl("Low", predictions$x), "Low", "Med-High"))
+    predictions$localarea <- as.factor(ifelse(grepl("Urban", predictions$x), "Urban", "Rural"))
+    jpeg("img/plot_quanti_2.jpeg",
+         width = 1200, height = "800")
+    print(predictions %>% 
+            ggplot(aes(x=predicted, y=fct_reorder(x,predicted,.fun='median'), 
+                       color = sex, linetype = ethnicity))+
+            geom_point(aes(shape = qualification, alpha = localarea),size=3) +
+            geom_linerange(aes(xmin = conf.low, xmax = conf.high, size = age)) +
+            labs(y = "Sratas",
+                 x = "",
+                 shape = "Qualification",
+                 alpha = "Life place",
+                 size = "Age class",
+                 color = "Sex category",
+                 linetype = "Ethnicity",
+                 title = "Predicted values for air pollution (pm10)") +
+            theme(axis.title = element_text(size = 10)) + 
+            scale_size_discrete(range = c(0.5, 1.5)) +
+            scale_alpha_discrete(range = c(0.5, 1)))
+dev.off()
+
+```
+![](img/plot_quanti_2.jpeg)
+
+
+## The variance change 
+
+To calculate the (additive) contribution of each category to the total variance, we can estimate the variance change when adjusting for this category. The Proportional Variance Change (PVC) when adjusting for all categories is the portion of ICC/VPC explained by additive effect. Therefore 100% - PVC is the part explained by an intersectional effect .
+
+
+```{r outputs_2_quanti_2,  message=FALSE, warning=FALSE}
+
+# models where we add each category one by one
+m_gender <- glmmTMB(AirPoll_PM10 ~ Sex + (1 | strata_2),
+                    data = mydata)
+m_ethnicity <- glmmTMB(Loneliness ~ Ethnicity + (1 | strata_2),
+                       data = mydata)
+m_age <- glmmTMB(AirPoll_PM10 ~ Age_class + (1 | strata_2),
+                 data = mydata)
+m_urban <- glmmTMB(AirPoll_PM10 ~ Urban + (1 | strata_2),
+                       data = mydata)
+m_qualif <- glmmTMB(AirPoll_PM10 ~ Qualification + (1 | strata_2),
+                 data = mydata)
+m_full <- glmmTMB(AirPoll_PM10 ~ Age_class + Ethnicity + Sex +
+                    Urban + Qualification +  (1 | strata_2),
+                  data = mydata)
+
+v_gender <- get_variance(m_gender)
+v_ethnicity <- get_variance(m_ethnicity)
+v_age <- get_variance(m_age)
+v_urban <- get_variance(m_urban)
+v_qualif <- get_variance(m_qualif)
+v_full <- get_variance(m_full)
+
+prop_gender <- round(((v_null$var.random - v_gender$var.random) / v_null$var.random)*100,2)
+prop_gender <- ifelse(is.null(prop_gender), 0, prop_gender)
+
+prop_ethnicity <- round(((v_null$var.random - v_ethnicity$var.random) / v_null$var.random)*100,2)
+prop_ethnicity <- ifelse(is.null(prop_ethnicity), 0, prop_ethnicity)
+
+prop_age <- round(((v_null$var.random - v_age$var.random) / v_null$var.random)*100,2)
+prop_age <- ifelse(is.null(prop_age), 0, prop_age)
+
+prop_qualif <- round(((v_null$var.random - v_qualif$var.random) / v_null$var.random)*100,2)
+prop_qualif <- ifelse(is.null(prop_qualif), 0, prop_qualif)
+
+prop_urban <- round(((v_null$var.random - v_urban$var.random) / v_null$var.random)*100,2)
+prop_urban <- ifelse(is.null(prop_urban), 0, prop_urban)
+
+prop_full <- round(((v_null$var.random - v_full$var.random) / v_null$var.random)*100,2)
+prop_full <- ifelse(is.null(prop_full), 100, prop_full)
+prop_intersection <- round(100 - prop_full,2)
+
+
+print(
+  as.data.frame(
+    cbind(
+    parameters = c("ICC/VPC", "% Sex category", "% Age/generation",
+                   "% Ethnicity", "% Life Place", "% Qualification",
+                   "%Intersection"),
+    values = c(ICC_intersect,prop_gender, prop_age, prop_ethnicity,
+               prop_urban,prop_qualif, prop_intersection )
+  )))
+
+```
+
+ICC is `r ICC_intersect`%, which is low. This differences is mainly explained by ethnicity (`r prop_ethnicity`%), life place (`r prop_urban`%) and sex category (`r prop_gender`%).
+
+
+

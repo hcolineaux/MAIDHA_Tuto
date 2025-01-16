@@ -15,7 +15,7 @@ table1::table1(~ Sex + Age_class + Ethnicity | AgeEducEnd_class,
 
 ```
 
-We can plot the observed probability.
+We can plot the observed means by strata.
 
 ```{r plot_12_quanti}
 jpeg("img/plot_12_quanti.jpeg",
@@ -27,7 +27,7 @@ mydata %>%
              y =value)) +
     geom_point()  +
     labs(x = "Stratas", y = "Age of Education End",
-         title = "Observed mean by stratas") +
+         title = "Observed means by stratas") +
   theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))
 dev.off()
 

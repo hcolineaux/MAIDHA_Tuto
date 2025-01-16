@@ -14,8 +14,9 @@ description: |
 
 # About
 
-We were largely inspired by the work of Evans et al (for example: @evans2024tutorial) and the vignette in the [ggeffects]:https://strengejacke.github.io/ggeffects/articles/practical_intersectionality.html package.
+Disclaimer: Here, I'm not going back over the theory and concepts involved in intersectional quantative analysis and MAIDHA models. This is simply a sharing of scripts to simplify the implementation of this type of analysis in epidemiology.
 
+We were largely inspired by the work of Evans et al (for example: @evans2024tutorial) and the vignette in the [ggeffects]:https://strengejacke.github.io/ggeffects/articles/practical_intersectionality.html package.
 
 [Licence]:https://creativecommons.org/licenses/by-nc-sa/4.0/
 
