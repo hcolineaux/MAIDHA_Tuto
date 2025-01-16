@@ -14,6 +14,7 @@ simple-example---binary-outcome
 description
 the-null-model-only-strata
 the-variance-change
-multilevels-models-simple-example---continous-outcome
+simple-example---continous-outcome
 description-1
 the-null-model-only-strata-1
+the-variance-change-1

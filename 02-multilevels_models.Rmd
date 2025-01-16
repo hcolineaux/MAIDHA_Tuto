@@ -16,7 +16,7 @@ table1::table1(~ Sex + Age_class + Ethnicity | Qualification,
 
 ```
 
-We can plot the observe probability.
+We can plot the observed probability.
 
 ```{r plot_12_quali}
 jpeg("img/plot_12_quali.jpeg",
@@ -154,6 +154,8 @@ print(
   )))
 
 ```
+
+ICC is `r ICC_intersect`%, which is low. This differences is mainly explained by ethnicity (`r prop_ethnicity`%), age (`r prop_age`%) and an intersectional effect  (`r prop_intersection`%).
 
 
 
