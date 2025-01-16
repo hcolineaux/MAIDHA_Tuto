@@ -1,0 +1,493 @@
+--- 
+title: "MAIDHA | Very detailed examples"
+author: "H. Colineaux"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+documentclass: book
+bibliography: book.bib
+site: bookdown::bookdown_site
+always_allow_html: true
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a very detailed example of using the MAIDHA approach to describe
+  intersectional phenomenon in biology and health.
+---
+
+# About
+
+We were largely inspired by the work of Evans et al (for example: @evans2024tutorial) and the vignette in the [ggeffects]:https://strengejacke.github.io/ggeffects/articles/practical_intersectionality.html package.
+
+
+[Licence]:https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+![](img/by-nc-sa.png){width=10%}
+
+The online version of this book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][Licence]. 
+
+
+
+
+<!--chapter:end:index.Rmd-->
+
+# Create stratas 
+
+```{r load_data, message=FALSE, warning=FALSE, include=FALSE}
+
+rm(list = ls())
+graphics.off()
+set.seed(25032024)
+
+library(tidyverse)
+library(ggeffects)   # predictions and significance testing
+library(insight)     # extracting random effects variances
+library(datawizard)  # data wrangling and preparation
+library(parameters)  # model summaries
+library(performance) # model fit indices, ICC
+library(glmmTMB)     # multilevel modelling
+library(sjPlot)
+
+full_data <- readRDS("../../data/alldata2_toplay")
+
+mydata <- full_data %>% select(
+  Age = Demo_Age_Num,
+  Sex = Demo_Sex_Bin_Men,
+  Ethnicity = Demo_Ethnic_Bin_White,
+  AgeEducEnd = SocioEco_Educ_AgeEnd_Num,
+  Qualification = SocioEco_Educ_QualifLev_Cat_Low,
+  Qualif_med = SocioEco_Educ_QualifLev_Cat_Medium,
+  Urban = Env_RuralOrUrban_Urban,
+  AirPoll_PM10 = Env_AirPoll_PM10_ugm3,
+  Loneliness = SocioEco_Social_Loneliness_Bin_Yes)
+
+rm(full_data)
+
+```
+
+## Choose variables
+
+For the first example, we use real data from the UKBB.
+
+This is an exploratory and not a confirmatory analysis, the results are purely didactic and cannot be really interpreted. In particular, for simplicity, a simple imputation of missing data (KNN) has been carried out, which may affect the results.
+
+### A first simple exemple (12 strata)
+To define strata, we choose the following variables: 
+
+- age, by classes "-50", "51-60", "61+"
+- declared binary sex category (men or women), 
+- ethnicity (white or non-white). 
+
+Outcomes will be 4th later intersectional categories describing cultural/intellectual ressources, i.e. 
+
+- either age at the end of education (quantitative variables) 
+- or level of qualification (binary variable).
+
+There are no variables characterizing socio-economic position at the start of life in this dataset, such as parent social class or income. 
+
+### A second exemple (48 strata)
+
+In a second step, we use to define intersectional strata:
+
+- age, by classes "-50", "51-60", "61+"
+- declared binary sex category (men or women), 
+- ethnicity (white or non-white)
+- level of qualification (medium/high, low)
+- and life place (rural, urban)
+
+The outcomes were: 
+
+- feeling lonely (binary outcomes)
+- exposition to air pollution (pm10, ugm3).
+
+
+## Definition and description
+
+```{r labels}
+mydata$Sex <- factor(round(mydata$Sex),
+                           labels = c("Women","Men"))
+
+mydata$Ethnicity <- factor(round(mydata$Ethnicity),
+                           label = c("Non White","White"))
+
+mydata <- mydata %>% 
+  # recode age into three groups
+  mutate(Age_class = round(Age)) %>% 
+  recode_values(
+    select = "Age_class",
+    recode = list(`1` = "min:50", `2` = 51:60, `3` = "61:max")) %>% 
+  mutate(Age_class = factor(Age_class, labels = c("-50", "51-60", "61+")))
+
+mydata$Qualification <- factor(round(mydata$Qualification),
+                               labels = c("Med-High Qualif.", "Low Qualif."))
+
+mydata$Urban <- factor(round(mydata$Urban),
+                       labels = c("Rural", "Urban"))
+
+mydata$Loneliness <- factor(round(mydata$Loneliness),
+                       labels = c("No", "Yes"))
+
+table1::table1(~ Sex + Age + Ethnicity + AgeEducEnd + Qualification + Urban + Loneliness + AirPoll_PM10,
+       data=mydata,
+    overall=c(left="Total"),
+    caption="Description")
+
+```
+
+## Create strata variables
+
+### For the first exemple (12 strata)
+
+To create the stratas, I use the method describe in the vignette in the [ggeffects]:https://strengejacke.github.io/ggeffects/articles/practical_intersectionality.html package.
+
+This involves concatenating the labels of the different variables. 
+
+Remember to name the variable in the label, for example Ethnicity[White;Non White] rather than White[Yes;No].
+
+```{r strata_1}
+mydata$strata <- ifelse(
+  is.na(mydata$Sex) | is.na(mydata$Ethnicity) | is.na(mydata$Age_class),
+  NA_character_,
+  paste0(mydata$Sex, ", ", mydata$Ethnicity, ", ", mydata$Age_class)
+)
+
+mydata$strata <- factor(mydata$strata)
+```
+
+We have 12 stratas
+
+```{r descr_strata_1}
+
+# data_tabulate(mydata$strata)
+
+table1::table1(~ strata,
+       data=mydata,
+    overall=c(left="Total"),
+    caption="Stratas (12)")
+
+```
+
+### For the second exemple (12 strata)
+
+And with more categories:
+
+```{r strata_2 }
+mydata$strata_2 <- ifelse(
+  is.na(mydata$Sex) | is.na(mydata$Ethnicity) | 
+    is.na(mydata$Age_class) | is.na(mydata$Qualification) | is.na(mydata$Urban),
+  NA_character_,
+  paste0(mydata$Sex, ", ", mydata$Ethnicity, ", ",
+         mydata$Age_class,", ", mydata$Qualification,", ", mydata$Urban)
+)
+```
+
+We have 48 stratas
+
+```{r descr_strata_2}
+
+mydata$strata_2 <- factor(mydata$strata_2)
+
+table1::table1(~ strata_2,
+       data=mydata,
+    overall=c(left="Total"),
+    caption="Stratas (48)")
+
+```
+
+In this case, some stratas are very small.
+
+```{r sizr_1, message=FALSE, warning=FALSE}
+tab <- data_tabulate(mydata$strata_2)
+tab <- tab[1:48,]
+min(tab$N)
+max(tab$N)
+
+```
+
+## Plots the stratas distribution
+
+### For the first exemple
+
+```{r plot_stata_1, message=FALSE, warning=FALSE}
+
+df <- data.frame(x = names(table(mydata$strata)),
+                 p = as.numeric(table(mydata$strata))/length(mydata$strata),
+                 n = as.numeric(table(mydata$strata)))
+
+df$sex = as.factor(ifelse(grepl("Men", df$x), "Men", "Women"))
+df$ethnicity <- as.factor(ifelse(grepl("Non White", df$x), "Non White", "White"))
+df$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
+                           ifelse(grepl("-50", df$x), "-50","51-60")))
+ggplot(data = df) + 
+  geom_col(aes(x = fct_reorder(x,n,.fun='median'), y = n,
+               linewidth = age,  fill = ethnicity), color = "black") +
+  geom_point(aes(x = fct_reorder(x,n,.fun='median'), y = n,
+                 color = sex), size =4) +
+  theme(plot.margin = margin(1,1,1.5,2, "cm"))+ 
+  labs (x="", y = "N",
+        fill = "Ethnicity") +
+  theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))+
+  scale_linewidth_discrete(range = c(0.5, 1))+
+  # scale_y_log10()
+  scale_y_continuous(breaks = c(100, 1000, 10000, 20000, 50000))+
+  scale_shape_manual(values=c(19, 15))
+
+```
+
+### For the second exemple
+
+```{r stata_2, fig.asp = 0.8, fig.width = 10}
+
+df_2 <- data.frame(x = names(table(mydata$strata_2)),
+                 p = as.numeric(table(mydata$strata_2))/length(mydata$strata_2),
+                 n = as.numeric(table(mydata$strata_2)))
+df_2$sex = as.factor(ifelse(grepl("Men", df_2$x), "Men", "Women"))
+df_2$ethnicity <- as.factor(ifelse(grepl("Non White", df_2$x), "Non White", "White"))
+df_2$age <- as.factor(ifelse(grepl("61+", df_2$x), "61+",
+                           ifelse(grepl("-50", df_2$x), "-50","51-60")))
+df_2$qualification <- as.factor(ifelse(grepl("Low", df_2$x), "Low", "Med-High"))
+df_2$LocalArea <- as.factor(ifelse(grepl("Urban", df_2$x), "Urban", "Rural"))
+
+
+ggplot(data = df_2) + 
+  geom_col(aes(x = fct_reorder(x,n,.fun='median'), y = n,
+               linewidth = age,  fill = ethnicity, alpha = LocalArea), color = "black") +
+  geom_point(aes(x = fct_reorder(x,n,.fun='median'), y = n,
+                 shape = qualification,  color = sex), size =4) +
+  theme(plot.margin = margin(1,1,1.5,2, "cm"))+ 
+  labs (x="", y = "N",
+        fill = "Ethnicity") +
+  theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))+
+  scale_alpha_discrete(range = c(0.5, 1))+
+  scale_linewidth_discrete(range = c(0.5, 1))+
+  # scale_y_log10()
+  scale_y_continuous(breaks = c(100, 1000, 10000, 20000, 50000))+
+  scale_shape_manual(values=c(19, 15))
+
+```
+
+
+
+
+<!--chapter:end:01-intro.Rmd-->
+
+# Multilevels models: Simple example - binary outcome
+
+As a working example, we want to explore intersectional inequalities in qualification (a "late" intersectional strata) by early intersectional strata (12 stratas).
+
+
+## Description
+
+We can start by describe the outcome by strata.
+
+```{r message=FALSE, warning=FALSE}
+
+table1::table1(~ Sex + Age_class + Ethnicity | Qualification,
+       data=mydata,
+    overall=c(left="Total"),
+    caption="Description by qualification level")
+
+```
+
+We can plot the observe probability.
+
+```{r plot_12_quali}
+
+mydata %>% 
+  group_by(strata) %>% 
+  mutate(tot = n()) %>% ungroup() %>% 
+  group_by(strata,Qualification) %>% 
+  mutate(value = n()/tot) %>% 
+  filter(Qualification == "Low Qualif.") %>% 
+  ggplot(aes(x = fct_reorder(strata,value,.fun='median'),
+             y =value)) +
+    geom_point()  +
+    labs(x = "Stratas", y = "Low Qualification",
+         title = "Observed percentage by stratas") +
+  theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))
+
+```
+
+
+## The null model (only strata) 
+
+The null model allows us to estimate the IntraClass correlation (ICC), also known as the Variance Partition Coefficient (VPC), that is the part of the outcome variance that can be explained by the strata.
+
+
+```{r models_1,  message=FALSE, warning=FALSE}
+
+# multilevel model
+m_null <- glmmTMB(Qualification ~ 1 + (1 | strata),
+                  data = mydata,
+                  family = binomial)
+
+# intercept varies according to the stratum
+sjPlot::plot_model(m_null, type = "diag")
+
+```
+
+Outputs of the models: 
+```{r output 1, message=FALSE, warning=FALSE}
+summary(m_null)
+
+# get the variances:
+v_null <- get_variance(m_null)
+# between stratas variance:
+v_null$var.random
+# intraclass correlation 
+ICC_intersect <- round(icc(m_null)$ICC_unadjusted*100, 2)
+ICC_intersect
+
+```
+
+Plot of the predicted values by strata:
+
+```{r plot 1, message=FALSE, warning=FALSE}
+#plot
+predictions <- predict_response(
+      m_null,
+      c("strata"),
+      type = "random") 
+    predictions <- predictions %>% 
+      arrange(predicted) 
+    predictions$rown = rownames(predictions)
+    predictions$x_lab <- paste0(predictions$rown,".",predictions$x)
+    predictions$sex <- as.factor(ifelse(grepl("Men", predictions$x), "Men", "Women"))
+    predictions$ethnicity <- as.factor(ifelse(grepl("Non white", predictions$x), "Non white", "White"))
+    predictions$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
+                           ifelse(grepl("-50", df$x), "-50","51-60")))
+    print(predictions %>% 
+            ggplot(aes(x=predicted, y=fct_reorder(x,predicted,.fun='median'),
+                       color = sex, linetype = ethnicity))+
+            geom_point(size=3) +
+            geom_linerange(aes(xmin = conf.low, xmax = conf.high, size = age))+
+            labs( y = "Sratas", 
+                  x = "",
+                  color = "Sex Category",
+                  linetype = "Ethnicity",
+                  size = "Age",
+                  title = paste("Predicted values for having a low qualification"))+
+            theme(axis.title = element_text(size = 10),
+                  axis.text=element_text(size=10)))+ 
+            scale_size_discrete(range = c(0.5, 1.5))
+
+```
+
+
+## The variance change 
+
+To calculate the (additive) contribution of each category to the total variance, we can estimate the variance change when adjusting for this category. The Proportional Variance Change (PVC) when adjusting for all categories is the portion of ICC/VPC explained by additive effect. Therefore 100% - PVC is the part explained by an intersectional effect .
+
+
+```{r outputs 2,  message=FALSE, warning=FALSE}
+
+# models where we add each category one by one
+m_gender <- glmmTMB(Qualification ~ Sex + (1 | strata), data = mydata, family=binomial)
+m_ethnicity <- glmmTMB(Qualification ~ Ethnicity + (1 | strata), data = mydata, family=binomial)
+m_age <- glmmTMB(Qualification ~ Age_class + (1 | strata), data = mydata, family=binomial)
+m_full <- glmmTMB(Qualification ~ Age_class + Ethnicity + Sex + (1 | strata), data = mydata, family=binomial)
+
+v_gender <- get_variance(m_gender)
+v_ethnicity <- get_variance(m_ethnicity)
+v_age <- get_variance(m_age)
+v_full <- get_variance(m_full)
+
+prop_gender <- round(((v_null$var.random - v_gender$var.random) / v_null$var.random)*100,2)
+prop_gender <- ifelse(is.null(prop_gender), 0, prop_gender)
+
+prop_ethnicity <- round(((v_null$var.random - v_ethnicity$var.random) / v_null$var.random)*100,2)
+prop_ethnicity <- ifelse(is.null(prop_ethnicity), 0, prop_ethnicity)
+
+prop_age <- round(((v_null$var.random - v_age$var.random) / v_null$var.random)*100,2)
+prop_age <- ifelse(is.null(prop_age), 0, prop_age)
+
+prop_full <- round(((v_null$var.random - v_full$var.random) / v_null$var.random)*100,2)
+prop_full <- ifelse(is.null(prop_full), 100, prop_full)
+prop_intersection <- round(100 - prop_full,2)
+
+
+print(
+  as.data.frame(
+    cbind(
+    parameters = c("ICC/VPC", "% Sex category", "% Age/generation", "% Ethnicity", "%Intersection"),
+    values = c(ICC_intersect,prop_gender, prop_age, prop_ethnicity,prop_intersection )
+  )))
+
+```
+
+
+
+
+<!--chapter:end:02-multilevels_models.Rmd-->
+
+# Multilevels models: Simple example - continous outcome
+
+
+## Description
+
+```{r, message=FALSE, warning=FALSE}
+
+mydata$AgeEducEnd_class <- as.factor(ifelse(mydata$AgeEducEnd < mean(mydata$AgeEducEnd),
+                                                                     "Below mean", "Above mean"))
+table1::table1(~ Sex + Age_class + Ethnicity | AgeEducEnd_class,
+       data=mydata,
+    overall=c(left="Total"),
+    caption="Description by age of education end")
+
+```
+
+```{r message=FALSE, warning=FALSE}
+ggplot(data = mydata) +
+  geom_boxplot(aes(x = fct_reorder(strata,AgeEducEnd,.fun='median'),
+           y = AgeEducEnd),outlier.shape = NA) +
+  geom_smooth(aes(x = as.numeric(fct_reorder(strata,AgeEducEnd,.fun='median')),
+           y = AgeEducEnd)) +
+  labs(x = "Stratas", y = "Age of education end") +
+  theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))+
+  scale_y_continuous(limits = c(12,22))
+
+```
+
+
+## The null model (only strata) 
+
+```{r models_2}
+
+# multilevel model
+m_null <- glmmTMB(Qualification ~ 1 + (1 | strata),
+                  data = mydata,
+                  family = binomial)
+
+# intercept varies according to the stratum
+sjPlot::plot_model(m_null, type = "diag")
+
+
+ggplot(data = mydata) +
+  geom_jitter(aes(x = fct_reorder(strata,as.numeric(Qualification),.fun='median'),
+           y = as.numeric(Qualification)-1)) +
+  geom_smooth(aes(x = as.numeric(fct_reorder(strata,as.numeric(Qualification),.fun='median')),
+           y = as.numeric(Qualification)-1)) +
+  labs(x = "Stratas", y = "Low Qualification") +
+  theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))
+
+
+
+```
+
+```{r}
+
+# models where we add each category one by one
+m_gender <- glmmTMB(Qualification ~ Sex + (1 | strata), data = mydata, family=binomial)
+m_ethnicity <- glmmTMB(Qualification ~ Ethnicity + (1 | strata), data = mydata, family=binomial)
+m_age <- glmmTMB(Qualification ~ Age_class + (1 | strata), data = mydata, family=binomial)
+
+
+
+```
+
+
+<!--chapter:end:03-multilevels_models_2.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:07-references.Rmd-->
+

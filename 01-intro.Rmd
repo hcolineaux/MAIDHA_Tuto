@@ -34,13 +34,41 @@ rm(full_data)
 
 ## Choose variables
 
-For the first example, we use real data from the UKBB, with the following variables: age, declared binary sex category (men or women), ethnicity (white or non-white). Outcomes will be a 4th later intersectional category describing cultural/intellectual ressources, i.e. either age at the end of education (quantitative variables) or level of qualification (binary variable). 
-
-In a second step, we use age, declared binary sex category, ethnicity, level of qualification and life place (rural, urban) as intersectional categories and the outcomes were: feeling lonely and exposition to air pollution (pm10, ugm3).
-
-There are no variables characterizing socio-economic position at the start of life in this dataset.
+For the first example, we use real data from the UKBB.
 
 This is an exploratory and not a confirmatory analysis, the results are purely didactic and cannot be really interpreted. In particular, for simplicity, a simple imputation of missing data (KNN) has been carried out, which may affect the results.
+
+### A first simple exemple (12 strata)
+To define strata, we choose the following variables: 
+
+- age, by classes "-50", "51-60", "61+"
+- declared binary sex category (men or women), 
+- ethnicity (white or non-white). 
+
+Outcomes will be 4th later intersectional categories describing cultural/intellectual ressources, i.e. 
+
+- either age at the end of education (quantitative variables) 
+- or level of qualification (binary variable).
+
+There are no variables characterizing socio-economic position at the start of life in this dataset, such as parent social class or income. 
+
+### A second exemple (48 strata)
+
+In a second step, we use to define intersectional strata:
+
+- age, by classes "-50", "51-60", "61+"
+- declared binary sex category (men or women), 
+- ethnicity (white or non-white)
+- level of qualification (medium/high, low)
+- and life place (rural, urban)
+
+The outcomes were: 
+
+- feeling lonely (binary outcomes)
+- exposition to air pollution (pm10, ugm3).
+
+
+## Definition and description
 
 ```{r labels}
 mydata$Sex <- factor(round(mydata$Sex),
@@ -75,9 +103,12 @@ table1::table1(~ Sex + Age + Ethnicity + AgeEducEnd + Qualification + Urban + Lo
 
 ## Create strata variables
 
+### For the first exemple (12 strata)
+
 To create the stratas, I use the method describe in the vignette in the [ggeffects]:https://strengejacke.github.io/ggeffects/articles/practical_intersectionality.html package.
 
 This involves concatenating the labels of the different variables. 
+
 Remember to name the variable in the label, for example Ethnicity[White;Non White] rather than White[Yes;No].
 
 ```{r strata_1}
@@ -88,6 +119,11 @@ mydata$strata <- ifelse(
 )
 
 mydata$strata <- factor(mydata$strata)
+```
+
+We have 12 stratas
+
+```{r descr_strata_1}
 
 # data_tabulate(mydata$strata)
 
@@ -96,9 +132,9 @@ table1::table1(~ strata,
     overall=c(left="Total"),
     caption="Stratas (12)")
 
-
 ```
 
+### For the second exemple (12 strata)
 
 And with more categories:
 
@@ -110,6 +146,11 @@ mydata$strata_2 <- ifelse(
   paste0(mydata$Sex, ", ", mydata$Ethnicity, ", ",
          mydata$Age_class,", ", mydata$Qualification,", ", mydata$Urban)
 )
+```
+
+We have 48 stratas
+
+```{r descr_strata_2}
 
 mydata$strata_2 <- factor(mydata$strata_2)
 
@@ -122,7 +163,17 @@ table1::table1(~ strata_2,
 
 In this case, some stratas are very small.
 
+```{r sizr_1, message=FALSE, warning=FALSE}
+tab <- data_tabulate(mydata$strata_2)
+tab <- tab[1:48,]
+min(tab$N)
+max(tab$N)
+
+```
+
 ## Plots the stratas distribution
+
+### For the first exemple
 
 ```{r plot_stata_1, message=FALSE, warning=FALSE}
 
@@ -149,6 +200,8 @@ ggplot(data = df) +
   scale_shape_manual(values=c(19, 15))
 
 ```
+
+### For the second exemple
 
 ```{r stata_2, fig.asp = 0.8, fig.width = 10}
 
