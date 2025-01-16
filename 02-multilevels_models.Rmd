@@ -54,6 +54,7 @@ sjPlot::plot_model(m_null, type = "diag")
 ```
 
 Outputs of the models: 
+
 ```{r output 1, message=FALSE, warning=FALSE}
 summary(m_null)
 

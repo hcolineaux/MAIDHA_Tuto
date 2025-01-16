@@ -134,7 +134,7 @@ table1::table1(~ strata,
 
 ```
 
-### For the second exemple (12 strata)
+### For the second exemple (48 strata)
 
 And with more categories:
 
@@ -185,6 +185,9 @@ df$sex = as.factor(ifelse(grepl("Men", df$x), "Men", "Women"))
 df$ethnicity <- as.factor(ifelse(grepl("Non White", df$x), "Non White", "White"))
 df$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
                            ifelse(grepl("-50", df$x), "-50","51-60")))
+
+jpeg("img/plot_stata_1.jpeg",
+         width = 1200, height = "800")
 ggplot(data = df) + 
   geom_col(aes(x = fct_reorder(x,n,.fun='median'), y = n,
                linewidth = age,  fill = ethnicity), color = "black") +
@@ -198,12 +201,16 @@ ggplot(data = df) +
   # scale_y_log10()
   scale_y_continuous(breaks = c(100, 1000, 10000, 20000, 50000))+
   scale_shape_manual(values=c(19, 15))
+dev.off()
+
 
 ```
+![](img/plot_stata_1.jpeg)
+
 
 ### For the second exemple
 
-```{r stata_2, fig.asp = 0.8, fig.width = 10}
+```{r stata_2, fig.asp = 0.8, fig.width = 10, message=FALSE, warning=FALSE}
 
 df_2 <- data.frame(x = names(table(mydata$strata_2)),
                  p = as.numeric(table(mydata$strata_2))/length(mydata$strata_2),
@@ -215,7 +222,8 @@ df_2$age <- as.factor(ifelse(grepl("61+", df_2$x), "61+",
 df_2$qualification <- as.factor(ifelse(grepl("Low", df_2$x), "Low", "Med-High"))
 df_2$LocalArea <- as.factor(ifelse(grepl("Urban", df_2$x), "Urban", "Rural"))
 
-
+jpeg("img/plot_stata_2.jpeg",
+         width = 1200, height = "800")
 ggplot(data = df_2) + 
   geom_col(aes(x = fct_reorder(x,n,.fun='median'), y = n,
                linewidth = age,  fill = ethnicity, alpha = LocalArea), color = "black") +
@@ -231,7 +239,12 @@ ggplot(data = df_2) +
   scale_y_continuous(breaks = c(100, 1000, 10000, 20000, 50000))+
   scale_shape_manual(values=c(19, 15))
 
+dev.off()
+
+
 ```
+![](img/plot_stata_2.jpeg)
+
 
 
 

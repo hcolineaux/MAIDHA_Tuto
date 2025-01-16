@@ -6,7 +6,7 @@ a-second-exemple-48-strata
 definition-and-description
 create-strata-variables
 for-the-first-exemple-12-strata
-for-the-second-exemple-12-strata
+for-the-second-exemple-48-strata
 plots-the-stratas-distribution
 for-the-first-exemple
 for-the-second-exemple
