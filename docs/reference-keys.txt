@@ -10,7 +10,7 @@ for-the-second-exemple-48-strata
 plots-the-stratas-distribution
 for-the-first-exemple
 for-the-second-exemple
-multilevels-models-simple-example---binary-outcome
+simple-example---binary-outcome
 description
 the-null-model-only-strata
 the-variance-change

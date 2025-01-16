@@ -33,7 +33,7 @@ intersectional phenomenon in biology and health.</p>" />
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="multilevels-models-simple-example---binary-outcome.html"/>
+<link rel="next" href="simple-example---binary-outcome.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -181,11 +181,11 @@ div.csl-indent {
 <li class="chapter" data-level="2.4.2" data-path="create-stratas.html"><a href="create-stratas.html#for-the-second-exemple"><i class="fa fa-check"></i><b>2.4.2</b> For the second exemple</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="multilevels-models-simple-example---binary-outcome.html"><a href="multilevels-models-simple-example---binary-outcome.html"><i class="fa fa-check"></i><b>3</b> Multilevels models: Simple example - binary outcome</a>
+<li class="chapter" data-level="3" data-path="simple-example---binary-outcome.html"><a href="simple-example---binary-outcome.html"><i class="fa fa-check"></i><b>3</b> Simple example - binary outcome</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="multilevels-models-simple-example---binary-outcome.html"><a href="multilevels-models-simple-example---binary-outcome.html#description"><i class="fa fa-check"></i><b>3.1</b> Description</a></li>
-<li class="chapter" data-level="3.2" data-path="multilevels-models-simple-example---binary-outcome.html"><a href="multilevels-models-simple-example---binary-outcome.html#the-null-model-only-strata"><i class="fa fa-check"></i><b>3.2</b> The null model (only strata)</a></li>
-<li class="chapter" data-level="3.3" data-path="multilevels-models-simple-example---binary-outcome.html"><a href="multilevels-models-simple-example---binary-outcome.html#the-variance-change"><i class="fa fa-check"></i><b>3.3</b> The variance change</a></li>
+<li class="chapter" data-level="3.1" data-path="simple-example---binary-outcome.html"><a href="simple-example---binary-outcome.html#description"><i class="fa fa-check"></i><b>3.1</b> Description</a></li>
+<li class="chapter" data-level="3.2" data-path="simple-example---binary-outcome.html"><a href="simple-example---binary-outcome.html#the-null-model-only-strata"><i class="fa fa-check"></i><b>3.2</b> The null model (only strata)</a></li>
+<li class="chapter" data-level="3.3" data-path="simple-example---binary-outcome.html"><a href="simple-example---binary-outcome.html#the-variance-change"><i class="fa fa-check"></i><b>3.3</b> The variance change</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multilevels-models-simple-example---continous-outcome.html"><a href="multilevels-models-simple-example---continous-outcome.html"><i class="fa fa-check"></i><b>4</b> Multilevels models: Simple example - continous outcome</a>
 <ul>
@@ -720,7 +720,7 @@ div.csl-indent {
 <span id="cb10-8"><a href="create-stratas.html#cb10-8" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;-50&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;-50&quot;</span>,<span class="st">&quot;51-60&quot;</span>)))</span>
 <span id="cb10-9"><a href="create-stratas.html#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="create-stratas.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/plot_stata_1.jpeg&quot;</span>,</span>
-<span id="cb10-11"><a href="create-stratas.html#cb10-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
+<span id="cb10-11"><a href="create-stratas.html#cb10-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
 <span id="cb10-12"><a href="create-stratas.html#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df) <span class="sc">+</span> </span>
 <span id="cb10-13"><a href="create-stratas.html#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(x,n,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>), <span class="at">y =</span> n,</span>
 <span id="cb10-14"><a href="create-stratas.html#cb10-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth =</span> age,  <span class="at">fill =</span> ethnicity), <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
@@ -732,7 +732,7 @@ div.csl-indent {
 <span id="cb10-20"><a href="create-stratas.html#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,  <span class="at">vjust=</span><span class="dv">1</span>,  <span class="at">hjust=</span><span class="dv">1</span>))<span class="sc">+</span></span>
 <span id="cb10-21"><a href="create-stratas.html#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linewidth_discrete</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>))<span class="sc">+</span></span>
 <span id="cb10-22"><a href="create-stratas.html#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_y_log10()</span></span>
-<span id="cb10-23"><a href="create-stratas.html#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">20000</span>, <span class="dv">50000</span>))<span class="sc">+</span></span>
+<span id="cb10-23"><a href="create-stratas.html#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">25000</span>,<span class="dv">50000</span>, <span class="dv">75000</span>))<span class="sc">+</span></span>
 <span id="cb10-24"><a href="create-stratas.html#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">15</span>))</span>
 <span id="cb10-25"><a href="create-stratas.html#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 <pre><code>## png 
@@ -765,7 +765,7 @@ div.csl-indent {
 <span id="cb12-22"><a href="create-stratas.html#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_alpha_discrete</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>))<span class="sc">+</span></span>
 <span id="cb12-23"><a href="create-stratas.html#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linewidth_discrete</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>))<span class="sc">+</span></span>
 <span id="cb12-24"><a href="create-stratas.html#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_y_log10()</span></span>
-<span id="cb12-25"><a href="create-stratas.html#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">20000</span>, <span class="dv">50000</span>))<span class="sc">+</span></span>
+<span id="cb12-25"><a href="create-stratas.html#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">20000</span>,<span class="dv">30000</span>,<span class="dv">40000</span>,<span class="dv">50000</span>))<span class="sc">+</span></span>
 <span id="cb12-26"><a href="create-stratas.html#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">15</span>))</span>
 <span id="cb12-27"><a href="create-stratas.html#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-28"><a href="create-stratas.html#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
@@ -782,7 +782,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="multilevels-models-simple-example---binary-outcome.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="simple-example---binary-outcome.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

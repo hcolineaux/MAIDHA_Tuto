@@ -187,7 +187,7 @@ df$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
                            ifelse(grepl("-50", df$x), "-50","51-60")))
 
 jpeg("img/plot_stata_1.jpeg",
-         width = 1200, height = "800")
+         width = 800, height = "500")
 ggplot(data = df) + 
   geom_col(aes(x = fct_reorder(x,n,.fun='median'), y = n,
                linewidth = age,  fill = ethnicity), color = "black") +
@@ -199,7 +199,7 @@ ggplot(data = df) +
   theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))+
   scale_linewidth_discrete(range = c(0.5, 1))+
   # scale_y_log10()
-  scale_y_continuous(breaks = c(100, 1000, 10000, 20000, 50000))+
+  scale_y_continuous(breaks = c(1000, 10000, 25000,50000, 75000))+
   scale_shape_manual(values=c(19, 15))
 dev.off()
 
@@ -236,7 +236,7 @@ ggplot(data = df_2) +
   scale_alpha_discrete(range = c(0.5, 1))+
   scale_linewidth_discrete(range = c(0.5, 1))+
   # scale_y_log10()
-  scale_y_continuous(breaks = c(100, 1000, 10000, 20000, 50000))+
+  scale_y_continuous(breaks = c(1000, 10000, 20000,30000,40000,50000))+
   scale_shape_manual(values=c(19, 15))
 
 dev.off()
