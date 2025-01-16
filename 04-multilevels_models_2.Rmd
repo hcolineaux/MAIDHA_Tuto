@@ -1,7 +1,6 @@
-# Simple example - binary outcome
+# More complexe example - binary outcome
 
-As a working example, we want to explore intersectional inequalities in qualification (a "late" intersectional strata) by early intersectional strata (12 stratas).
-
+As a working example, we want to explore intersectional inequalities in loneliness by  intersectional strata (48 stratas).
 
 ## Description
 
@@ -9,7 +8,8 @@ We can start by describe the outcome by strata.
 
 ```{r message=FALSE, warning=FALSE}
 
-table1::table1(~ Sex + Age_class + Ethnicity | Qualification,
+table1::table1(~ Sex + Age_class + Ethnicity +
+                 Qualification + Urban | Loneliness,
        data=mydata,
     overall=c(left="Total"),
     caption="Description by qualification level")
@@ -18,25 +18,25 @@ table1::table1(~ Sex + Age_class + Ethnicity | Qualification,
 
 We can plot the observed probability.
 
-```{r plot_12_quali}
-jpeg("img/plot_12_quali.jpeg",
+```{r plot_12_quali_2}
+jpeg("img/plot_12_quali_2.jpeg",
          width = 1200, height = "800")
 mydata %>% 
-  group_by(strata) %>% 
+  group_by(strata_2) %>% 
   mutate(tot = n()) %>% ungroup() %>% 
-  group_by(strata,Qualification) %>% 
+  group_by(strata_2,Loneliness) %>% 
   mutate(value = n()/tot) %>% 
-  filter(Qualification == "Low Qualif.") %>% 
+  filter(Loneliness == "Yes") %>% 
   ggplot(aes(x = fct_reorder(strata,value,.fun='median'),
              y =value)) +
     geom_point()  +
-    labs(x = "Stratas", y = "Low Qualification",
+    labs(x = "Stratas", y = "Loneliness",
          title = "Observed percentage by stratas") +
   theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))
 dev.off()
 
 ```
-![](img/plot_12_quali.jpeg)
+![](img/plot_12_quali_2.jpeg)
 
 
 ## The null model (only strata) 
@@ -44,26 +44,26 @@ dev.off()
 The null model allows us to estimate the IntraClass correlation (ICC), also known as the Variance Partition Coefficient (VPC), that is the part of the outcome variance that can be explained by the strata.
 
 
-```{r models_1,  message=FALSE, warning=FALSE}
+```{r models_1_2,  message=FALSE, warning=FALSE}
 
 # multilevel model
-m_null <- glmmTMB(Qualification ~ 1 + (1 | strata),
+m_null <- glmmTMB(Loneliness ~ 1 + (1 | strata_2),
                   data = mydata,
                   family = binomial)
 
 # intercept varies according to the stratum
-jpeg("img/models_1.jpeg",
+jpeg("img/models_1_2.jpeg",
          width = 1200, height = "800")
 sjPlot::plot_model(m_null, type = "diag")
 dev.off()
 
 
 ```
-![](img/models_1.jpeg)
+![](img/models_1_2.jpeg)
 
 Outputs of the models: 
 
-```{r output 1, message=FALSE, warning=FALSE}
+```{r output 1_2, message=FALSE, warning=FALSE}
 summary(m_null)
 
 # get the variances:
@@ -78,11 +78,11 @@ ICC_intersect
 
 Plot of the predicted values by strata:
 
-```{r plot 1, message=FALSE, warning=FALSE}
+```{r plot_1_2, message=FALSE, warning=FALSE}
 #plot
 predictions <- predict_response(
       m_null,
-      c("strata"),
+      c("strata_2"),
       type = "random") 
     predictions <- predictions %>% 
       arrange(predicted) 
@@ -92,26 +92,30 @@ predictions <- predict_response(
     predictions$ethnicity <- as.factor(ifelse(grepl("Non White", predictions$x), "Non white", "White"))
     predictions$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
                            ifelse(grepl("-50", df$x), "-50","51-60")))
-    jpeg("img/plot.jpeg",
+    predictions$qualification <- as.factor(ifelse(grepl("Low", predictions$x), "Low", "Med-High"))
+    predictions$localarea <- as.factor(ifelse(grepl("Urban", predictions$x), "Urban", "Rural"))
+    jpeg("img/plot_2.jpeg",
          width = 1200, height = "800")
     print(predictions %>% 
-            ggplot(aes(x=predicted, y=fct_reorder(x,predicted,.fun='median'),
+            ggplot(aes(x=predicted, y=fct_reorder(x,predicted,.fun='median'), 
                        color = sex, linetype = ethnicity))+
-            geom_point(size=3) +
-            geom_linerange(aes(xmin = conf.low, xmax = conf.high, size = age))+
-            labs( y = "Sratas", 
-                  x = "",
-                  color = "Sex Category",
-                  linetype = "Ethnicity",
-                  size = "Age",
-                  title = paste("Predicted values for having a low qualification"))+
-            theme(axis.title = element_text(size = 10),
-                  axis.text=element_text(size=10)))+ 
-            scale_size_discrete(range = c(0.5, 1.5))
+            geom_point(aes(shape = qualification, alpha = localarea),size=3) +
+            geom_linerange(aes(xmin = conf.low, xmax = conf.high, size = age)) +
+            labs(y = "Sratas",
+                 x = "",
+                 shape = "Qualification",
+                 alpha = "Life place",
+                 size = "Age class",
+                 color = "Sex category",
+                 linetype = "Ethnicity",
+                 title = "Predicted values for Loneliness") +
+            theme(axis.title = element_text(size = 10)) + 
+            scale_size_discrete(range = c(0.5, 1.5)) +
+            scale_alpha_discrete(range = c(0.5, 1)))
 dev.off()
 
 ```
-![](img/plot.jpeg)
+![](img/plot_2.jpeg)
 
 
 ## The variance change 
@@ -119,17 +123,28 @@ dev.off()
 To calculate the (additive) contribution of each category to the total variance, we can estimate the variance change when adjusting for this category. The Proportional Variance Change (PVC) when adjusting for all categories is the portion of ICC/VPC explained by additive effect. Therefore 100% - PVC is the part explained by an intersectional effect .
 
 
-```{r outputs 2,  message=FALSE, warning=FALSE}
+```{r outputs_2_2,  message=FALSE, warning=FALSE}
 
 # models where we add each category one by one
-m_gender <- glmmTMB(Qualification ~ Sex + (1 | strata), data = mydata, family=binomial)
-m_ethnicity <- glmmTMB(Qualification ~ Ethnicity + (1 | strata), data = mydata, family=binomial)
-m_age <- glmmTMB(Qualification ~ Age_class + (1 | strata), data = mydata, family=binomial)
-m_full <- glmmTMB(Qualification ~ Age_class + Ethnicity + Sex + (1 | strata), data = mydata, family=binomial)
+m_gender <- glmmTMB(Loneliness ~ Sex + (1 | strata_2),
+                    data = mydata, family=binomial)
+m_ethnicity <- glmmTMB(Loneliness ~ Ethnicity + (1 | strata_2),
+                       data = mydata, family=binomial)
+m_age <- glmmTMB(Loneliness ~ Age_class + (1 | strata_2),
+                 data = mydata, family=binomial)
+m_urban <- glmmTMB(Loneliness ~ Urban + (1 | strata_2),
+                       data = mydata, family=binomial)
+m_qualif <- glmmTMB(Loneliness ~ Qualification + (1 | strata_2),
+                 data = mydata, family=binomial)
+m_full <- glmmTMB(Loneliness ~ Age_class + Ethnicity + Sex +
+                    Urban + Qualification +  (1 | strata_2),
+                  data = mydata, family=binomial)
 
 v_gender <- get_variance(m_gender)
 v_ethnicity <- get_variance(m_ethnicity)
 v_age <- get_variance(m_age)
+v_urban <- get_variance(m_urban)
+v_qualif <- get_variance(m_qualif)
 v_full <- get_variance(m_full)
 
 prop_gender <- round(((v_null$var.random - v_gender$var.random) / v_null$var.random)*100,2)
@@ -141,6 +156,12 @@ prop_ethnicity <- ifelse(is.null(prop_ethnicity), 0, prop_ethnicity)
 prop_age <- round(((v_null$var.random - v_age$var.random) / v_null$var.random)*100,2)
 prop_age <- ifelse(is.null(prop_age), 0, prop_age)
 
+prop_qualif <- round(((v_null$var.random - v_qualif$var.random) / v_null$var.random)*100,2)
+prop_qualif <- ifelse(is.null(prop_qualif), 0, prop_qualif)
+
+prop_urban <- round(((v_null$var.random - v_urban$var.random) / v_null$var.random)*100,2)
+prop_urban <- ifelse(is.null(prop_urban), 0, prop_urban)
+
 prop_full <- round(((v_null$var.random - v_full$var.random) / v_null$var.random)*100,2)
 prop_full <- ifelse(is.null(prop_full), 100, prop_full)
 prop_intersection <- round(100 - prop_full,2)
@@ -149,13 +170,16 @@ prop_intersection <- round(100 - prop_full,2)
 print(
   as.data.frame(
     cbind(
-    parameters = c("ICC/VPC", "% Sex category", "% Age/generation", "% Ethnicity", "%Intersection"),
-    values = c(ICC_intersect,prop_gender, prop_age, prop_ethnicity,prop_intersection )
+    parameters = c("ICC/VPC", "% Sex category", "% Age/generation",
+                   "% Ethnicity", "% Life Place", "% Qualification",
+                   "%Intersection"),
+    values = c(ICC_intersect,prop_gender, prop_age, prop_ethnicity,
+               prop_urban,prop_qualif, prop_intersection )
   )))
 
 ```
 
-ICC is `r ICC_intersect`%, which is low. This differences is mainly explained by ethnicity (`r prop_ethnicity`%), age (`r prop_age`%) and an intersectional effect  (`r prop_intersection`%).
+ICC is `r ICC_intersect`%, which is low. This differences is mainly explained by ethnicity (`r prop_ethnicity`%), life place (`r prop_urban`%) and sex category (`r prop_gender`%).
 
 
 

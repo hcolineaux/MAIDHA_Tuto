@@ -18,3 +18,7 @@ simple-example---continous-outcome
 description-1
 the-null-model-only-strata-1
 the-variance-change-1
+more-complexe-example---binary-outcome
+description-2
+the-null-model-only-strata-2
+the-variance-change-2

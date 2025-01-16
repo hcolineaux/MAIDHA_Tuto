@@ -33,7 +33,7 @@ intersectional phenomenon in biology and health.</p>" />
   
   
 <link rel="prev" href="simple-example---binary-outcome.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="more-complexe-example---binary-outcome.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -192,6 +192,12 @@ div.csl-indent {
 <li class="chapter" data-level="4.1" data-path="simple-example---continous-outcome.html"><a href="simple-example---continous-outcome.html#description-1"><i class="fa fa-check"></i><b>4.1</b> Description</a></li>
 <li class="chapter" data-level="4.2" data-path="simple-example---continous-outcome.html"><a href="simple-example---continous-outcome.html#the-null-model-only-strata-1"><i class="fa fa-check"></i><b>4.2</b> The null model (only strata)</a></li>
 <li class="chapter" data-level="4.3" data-path="simple-example---continous-outcome.html"><a href="simple-example---continous-outcome.html#the-variance-change-1"><i class="fa fa-check"></i><b>4.3</b> The variance change</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="more-complexe-example---binary-outcome.html"><a href="more-complexe-example---binary-outcome.html"><i class="fa fa-check"></i><b>5</b> More complexe example - binary outcome</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="more-complexe-example---binary-outcome.html"><a href="more-complexe-example---binary-outcome.html#description-2"><i class="fa fa-check"></i><b>5.1</b> Description</a></li>
+<li class="chapter" data-level="5.2" data-path="more-complexe-example---binary-outcome.html"><a href="more-complexe-example---binary-outcome.html#the-null-model-only-strata-2"><i class="fa fa-check"></i><b>5.2</b> The null model (only strata)</a></li>
+<li class="chapter" data-level="5.3" data-path="more-complexe-example---binary-outcome.html"><a href="more-complexe-example---binary-outcome.html#the-variance-change-2"><i class="fa fa-check"></i><b>5.3</b> The variance change</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -363,7 +369,7 @@ div.csl-indent {
 <span id="cb41-8"><a href="simple-example---continous-outcome.html#cb41-8" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>rown <span class="ot">=</span> <span class="fu">rownames</span>(predictions)</span>
 <span id="cb41-9"><a href="simple-example---continous-outcome.html#cb41-9" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>x_lab <span class="ot">&lt;-</span> <span class="fu">paste0</span>(predictions<span class="sc">$</span>rown,<span class="st">&quot;.&quot;</span>,predictions<span class="sc">$</span>x)</span>
 <span id="cb41-10"><a href="simple-example---continous-outcome.html#cb41-10" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Men&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Men&quot;</span>, <span class="st">&quot;Women&quot;</span>))</span>
-<span id="cb41-11"><a href="simple-example---continous-outcome.html#cb41-11" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>ethnicity <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Non white&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Non white&quot;</span>, <span class="st">&quot;White&quot;</span>))</span>
+<span id="cb41-11"><a href="simple-example---continous-outcome.html#cb41-11" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>ethnicity <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Non White&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Non white&quot;</span>, <span class="st">&quot;White&quot;</span>))</span>
 <span id="cb41-12"><a href="simple-example---continous-outcome.html#cb41-12" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;61+&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;61+&quot;</span>,</span>
 <span id="cb41-13"><a href="simple-example---continous-outcome.html#cb41-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;-50&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;-50&quot;</span>,<span class="st">&quot;51-60&quot;</span>)))</span>
 <span id="cb41-14"><a href="simple-example---continous-outcome.html#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">jpeg</span>(<span class="st">&quot;img/plot_quanti.jpeg&quot;</span>,</span>
@@ -437,7 +443,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="simple-example---binary-outcome.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="more-complexe-example---binary-outcome.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

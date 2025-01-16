@@ -31,6 +31,7 @@ mydata %>%
   theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))
 dev.off()
 
+
 ```
 ![](img/plot_12_quanti.jpeg)
 
@@ -77,7 +78,7 @@ predictions <- predict_response(
     predictions$rown = rownames(predictions)
     predictions$x_lab <- paste0(predictions$rown,".",predictions$x)
     predictions$sex <- as.factor(ifelse(grepl("Men", predictions$x), "Men", "Women"))
-    predictions$ethnicity <- as.factor(ifelse(grepl("Non white", predictions$x), "Non white", "White"))
+    predictions$ethnicity <- as.factor(ifelse(grepl("Non White", predictions$x), "Non white", "White"))
     predictions$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
                            ifelse(grepl("-50", df$x), "-50","51-60")))
     jpeg("img/plot_quanti.jpeg",
