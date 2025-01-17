@@ -12,7 +12,8 @@ mydata$AirPoll_PM10d_class <- as.factor(ifelse(mydata$AirPoll_PM10 < mean(mydata
 
 table1::table1(~ Sex + Age_class + Ethnicity +
                  Education + Urban | AirPoll_PM10d_class,
-       data=mydata,
+              row_wise = TRUE,
+data=mydata,
     overall=c(left="Total"),
     caption="Description by air pollution")
 

@@ -11,7 +11,8 @@ We can start by describe the outcome by strata.
 
 table1::table1(~ Sex + Age_class + Ethnicity | Urban,
        data=mydata,
-    overall=c(left="Total"),
+           row_wise = TRUE,
+overall=c(left="Total"),
     caption="Description by life place")
 
 ```
@@ -104,7 +105,7 @@ predictions <- predict_response(
                   color = "Sex Category",
                   linetype = "Ethnicity",
                   size = "Age",
-                  title = paste("Predicted values for having a low Urban"))+
+                  title = paste("Predicted values for living in a urban area"))+
             theme(axis.title = element_text(size = 10),
                   axis.text=element_text(size=10)))+ 
             scale_size_discrete(range = c(0.5, 1.5))

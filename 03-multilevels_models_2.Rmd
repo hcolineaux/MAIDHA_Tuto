@@ -1,6 +1,6 @@
 # Simple example - continous outcome
 
-As a working example, we want to explore intersectional inequalities in educaion length (a "late" intersectional strata) by early intersectional strata (12 stratas).
+As a working example, we want to explore intersectional inequalities in education length (a "late" intersectional strata) by early intersectional strata (12 stratas).
 
 ## Description
 
@@ -8,7 +8,8 @@ As a working example, we want to explore intersectional inequalities in educaion
 
 table1::table1(~ Sex + Age_class + Ethnicity | Education,
        data=mydata,
-    overall=c(left="Total"),
+           row_wise = TRUE,
+overall=c(left="Total"),
     caption="Description by age of education end")
 
 ```

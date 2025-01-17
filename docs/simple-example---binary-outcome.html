@@ -231,8 +231,9 @@ div.csl-indent {
 <p>We can start by describe the outcome by strata.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="simple-example---binary-outcome.html#cb14-1" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">|</span> Urban,</span>
 <span id="cb14-2"><a href="simple-example---binary-outcome.html#cb14-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
-<span id="cb14-3"><a href="simple-example---binary-outcome.html#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
-<span id="cb14-4"><a href="simple-example---binary-outcome.html#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by life place&quot;</span>)</span></code></pre></div>
+<span id="cb14-3"><a href="simple-example---binary-outcome.html#cb14-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">row_wise =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-4"><a href="simple-example---binary-outcome.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
+<span id="cb14-5"><a href="simple-example---binary-outcome.html#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by life place&quot;</span>)</span></code></pre></div>
 <div class="Rtable1"><table class="Rtable1"><caption>Description by life place</caption>
 
 <thead>
@@ -400,7 +401,7 @@ div.csl-indent {
 <span id="cb27-23"><a href="simple-example---binary-outcome.html#cb27-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="st">&quot;Sex Category&quot;</span>,</span>
 <span id="cb27-24"><a href="simple-example---binary-outcome.html#cb27-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linetype =</span> <span class="st">&quot;Ethnicity&quot;</span>,</span>
 <span id="cb27-25"><a href="simple-example---binary-outcome.html#cb27-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">size =</span> <span class="st">&quot;Age&quot;</span>,</span>
-<span id="cb27-26"><a href="simple-example---binary-outcome.html#cb27-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Predicted values for having a low Urban&quot;</span>))<span class="sc">+</span></span>
+<span id="cb27-26"><a href="simple-example---binary-outcome.html#cb27-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Predicted values for living in a urban area&quot;</span>))<span class="sc">+</span></span>
 <span id="cb27-27"><a href="simple-example---binary-outcome.html#cb27-27" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
 <span id="cb27-28"><a href="simple-example---binary-outcome.html#cb27-28" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>)))<span class="sc">+</span> </span>
 <span id="cb27-29"><a href="simple-example---binary-outcome.html#cb27-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_size_discrete</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>))</span>

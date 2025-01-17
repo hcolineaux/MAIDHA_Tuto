@@ -225,13 +225,14 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="simple-example---continous-outcome" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Simple example - continous outcome<a href="simple-example---continous-outcome.html#simple-example---continous-outcome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>As a working example, we want to explore intersectional inequalities in educaion length (a “late” intersectional strata) by early intersectional strata (12 stratas).</p>
+<p>As a working example, we want to explore intersectional inequalities in education length (a “late” intersectional strata) by early intersectional strata (12 stratas).</p>
 <div id="description-1" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Description<a href="simple-example---continous-outcome.html#description-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="simple-example---continous-outcome.html#cb31-1" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">|</span> Education,</span>
 <span id="cb31-2"><a href="simple-example---continous-outcome.html#cb31-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
-<span id="cb31-3"><a href="simple-example---continous-outcome.html#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
-<span id="cb31-4"><a href="simple-example---continous-outcome.html#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by age of education end&quot;</span>)</span></code></pre></div>
+<span id="cb31-3"><a href="simple-example---continous-outcome.html#cb31-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">row_wise =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb31-4"><a href="simple-example---continous-outcome.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
+<span id="cb31-5"><a href="simple-example---continous-outcome.html#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by age of education end&quot;</span>)</span></code></pre></div>
 <div class="Rtable1"><table class="Rtable1"><caption>Description by age of education end</caption>
 
 <thead>
