@@ -308,7 +308,7 @@ div.csl-indent {
 </div>
 <p>We can plot the observed means by strata.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="simple-example---continous-outcome.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/plot_12_quanti.jpeg&quot;</span>,</span>
-<span id="cb32-2"><a href="simple-example---continous-outcome.html#cb32-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
+<span id="cb32-2"><a href="simple-example---continous-outcome.html#cb32-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
 <span id="cb32-3"><a href="simple-example---continous-outcome.html#cb32-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span> </span>
 <span id="cb32-4"><a href="simple-example---continous-outcome.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata) <span class="sc">%&gt;%</span> </span>
 <span id="cb32-5"><a href="simple-example---continous-outcome.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">mean</span>(AgeEducEnd)) <span class="sc">%&gt;%</span> </span>
@@ -377,7 +377,7 @@ div.csl-indent {
 <span id="cb41-12"><a href="simple-example---continous-outcome.html#cb41-12" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;61+&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;61+&quot;</span>,</span>
 <span id="cb41-13"><a href="simple-example---continous-outcome.html#cb41-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;-50&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;-50&quot;</span>,<span class="st">&quot;51-60&quot;</span>)))</span>
 <span id="cb41-14"><a href="simple-example---continous-outcome.html#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">jpeg</span>(<span class="st">&quot;img/plot_quanti.jpeg&quot;</span>,</span>
-<span id="cb41-15"><a href="simple-example---continous-outcome.html#cb41-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
+<span id="cb41-15"><a href="simple-example---continous-outcome.html#cb41-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
 <span id="cb41-16"><a href="simple-example---continous-outcome.html#cb41-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(predictions <span class="sc">%&gt;%</span> </span>
 <span id="cb41-17"><a href="simple-example---continous-outcome.html#cb41-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>predicted, <span class="at">y=</span><span class="fu">fct_reorder</span>(x,predicted,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>),</span>
 <span id="cb41-18"><a href="simple-example---continous-outcome.html#cb41-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> sex, <span class="at">linetype =</span> ethnicity))<span class="sc">+</span></span>
@@ -437,7 +437,7 @@ div.csl-indent {
 ## 3 % Age/generation   9.55
 ## 4      % Ethnicity  81.07
 ## 5    %Intersection   6.62</code></pre>
-<p>ICC is 5.32%, which is moderate. This differences is mainly explained by ethnicity (81.07%), age (9.55%) and an intersectional effect (6.62%).</p>
+<p>ICC is 5.32%, which is moderate. This differences is mainly explained by ethnicity (81.07%), and, to a lesser extend, age (9.55%) and an intersectional effect (6.62%).</p>
 
 </div>
 </div>

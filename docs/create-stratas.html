@@ -288,10 +288,13 @@ div.csl-indent {
 <span id="cb1-23"><a href="create-stratas.html#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">recode =</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">0</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;min:16&quot;</span>, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;17:max&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-24"><a href="create-stratas.html#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Education =</span> <span class="fu">factor</span>(Education, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Short Educ.&quot;</span>, <span class="st">&quot;Long Educ.&quot;</span>)))</span>
 <span id="cb1-25"><a href="create-stratas.html#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="create-stratas.html#cb1-26" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age <span class="sc">+</span> Ethnicity <span class="sc">+</span> AgeEducEnd <span class="sc">+</span> Education <span class="sc">+</span> Urban <span class="sc">+</span> AlcDaily <span class="sc">+</span> AirPoll_PM10,</span>
-<span id="cb1-27"><a href="create-stratas.html#cb1-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
-<span id="cb1-28"><a href="create-stratas.html#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
-<span id="cb1-29"><a href="create-stratas.html#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description&quot;</span>)</span></code></pre></div>
+<span id="cb1-26"><a href="create-stratas.html#cb1-26" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>AlcDaily <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">round</span>(mydata<span class="sc">$</span>AlcDaily),</span>
+<span id="cb1-27"><a href="create-stratas.html#cb1-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>))</span>
+<span id="cb1-28"><a href="create-stratas.html#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="create-stratas.html#cb1-29" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age <span class="sc">+</span> Ethnicity <span class="sc">+</span> AgeEducEnd <span class="sc">+</span> Education <span class="sc">+</span> Urban <span class="sc">+</span> AlcDaily <span class="sc">+</span> AirPoll_PM10,</span>
+<span id="cb1-30"><a href="create-stratas.html#cb1-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
+<span id="cb1-31"><a href="create-stratas.html#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
+<span id="cb1-32"><a href="create-stratas.html#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description&quot;</span>)</span></code></pre></div>
 <div class="Rtable1"><table class="Rtable1"><caption>Description</caption>
 
 <thead>
@@ -378,12 +381,12 @@ div.csl-indent {
 <td class='firstrow'></td>
 </tr>
 <tr>
-<td class='rowlabel'>Mean (SD)</td>
-<td>0.203 (0.402)</td>
+<td class='rowlabel'>No</td>
+<td>400687 (79.7%)</td>
 </tr>
 <tr>
-<td class='rowlabel lastrow'>Median [Min, Max]</td>
-<td class='lastrow'>0 [0, 1.00]</td>
+<td class='rowlabel lastrow'>Yes</td>
+<td class='lastrow'>101774 (20.3%)</td>
 </tr>
 <tr>
 <td class='rowlabel firstrow'>AirPoll_PM10</td>

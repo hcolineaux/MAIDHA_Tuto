@@ -94,6 +94,9 @@ mydata <- mydata %>%
     recode = list(`0` = "min:16", `1` = "17:max")) %>% 
   mutate(Education = factor(Education, labels = c("Short Educ.", "Long Educ.")))
 
+mydata$AlcDaily <- factor(round(mydata$AlcDaily),
+                       labels = c("No", "Yes"))
+
 table1::table1(~ Sex + Age + Ethnicity + AgeEducEnd + Education + Urban + AlcDaily + AirPoll_PM10,
        data=mydata,
     overall=c(left="Total"),

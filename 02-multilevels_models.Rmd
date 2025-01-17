@@ -20,7 +20,7 @@ We can plot the observed probability.
 
 ```{r plot_12_quali}
 jpeg("img/plot_12_quali.jpeg",
-         width = 1200, height = "800")
+         width = 800, height = "500")
 mydata %>% 
   group_by(strata) %>% 
   mutate(tot = n()) %>% ungroup() %>% 
@@ -53,7 +53,7 @@ m_null <- glmmTMB(Urban ~ 1 + (1 | strata),
 
 # intercept varies according to the stratum
 jpeg("img/models_1.jpeg",
-         width = 1200, height = "800")
+         width = 800, height = "500")
 sjPlot::plot_model(m_null, type = "diag")
 dev.off()
 
@@ -93,7 +93,7 @@ predictions <- predict_response(
     predictions$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
                            ifelse(grepl("-50", df$x), "-50","51-60")))
     jpeg("img/plot.jpeg",
-         width = 1200, height = "800")
+         width = 800, height = "500")
     print(predictions %>% 
             ggplot(aes(x=predicted, y=fct_reorder(x,predicted,.fun='median'),
                        color = sex, linetype = ethnicity))+
@@ -155,7 +155,7 @@ print(
 
 ```
 
-ICC is `r ICC_intersect`%, which is low. This differences is mainly explained by ethnicity (`r prop_ethnicity`%), sex category  (`r prop_gender`%) and age (`r prop_age`%).
+ICC is `r ICC_intersect`%, which is high. These differences is almost totally explained by ethnicity (`r prop_ethnicity`%).
 
 
 

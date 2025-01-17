@@ -349,7 +349,7 @@ div.csl-indent {
 </div>
 <p>We can plot the observed means by strata.</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="more-complexe-example---quantitative-outcome.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/plot_12_quanti_2.jpeg&quot;</span>,</span>
-<span id="cb63-2"><a href="more-complexe-example---quantitative-outcome.html#cb63-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
+<span id="cb63-2"><a href="more-complexe-example---quantitative-outcome.html#cb63-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
 <span id="cb63-3"><a href="more-complexe-example---quantitative-outcome.html#cb63-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span> </span>
 <span id="cb63-4"><a href="more-complexe-example---quantitative-outcome.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata_2) <span class="sc">%&gt;%</span> </span>
 <span id="cb63-5"><a href="more-complexe-example---quantitative-outcome.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">mean</span>(AirPoll_PM10)) <span class="sc">%&gt;%</span> </span>
@@ -420,7 +420,7 @@ div.csl-indent {
 <span id="cb72-14"><a href="more-complexe-example---quantitative-outcome.html#cb72-14" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>Education <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Short&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Short&quot;</span>, <span class="st">&quot;Long&quot;</span>))</span>
 <span id="cb72-15"><a href="more-complexe-example---quantitative-outcome.html#cb72-15" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>localarea <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Urban&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Urban&quot;</span>, <span class="st">&quot;Rural&quot;</span>))</span>
 <span id="cb72-16"><a href="more-complexe-example---quantitative-outcome.html#cb72-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">jpeg</span>(<span class="st">&quot;img/plot_quanti_2.jpeg&quot;</span>,</span>
-<span id="cb72-17"><a href="more-complexe-example---quantitative-outcome.html#cb72-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
+<span id="cb72-17"><a href="more-complexe-example---quantitative-outcome.html#cb72-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
 <span id="cb72-18"><a href="more-complexe-example---quantitative-outcome.html#cb72-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(predictions <span class="sc">%&gt;%</span> </span>
 <span id="cb72-19"><a href="more-complexe-example---quantitative-outcome.html#cb72-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>predicted, <span class="at">y=</span><span class="fu">fct_reorder</span>(x,predicted,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>), </span>
 <span id="cb72-20"><a href="more-complexe-example---quantitative-outcome.html#cb72-20" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> sex, <span class="at">linetype =</span> ethnicity))<span class="sc">+</span></span>
@@ -504,7 +504,7 @@ div.csl-indent {
 ## 5     % Life Place  89.12
 ## 6      % Education   0.44
 ## 7    %Intersection   0.62</code></pre>
-<p>ICC is 17.79%, which is low. This differences is mainly explained by ethnicity (8.65%), life place (89.12%) and sex category (0.1%).</p>
+<p>ICC is 17.79%, which is high This differences is mainly explained by life place (89.12%), but also, to a lesser extend, ethnicity (8.65%).</p>
 
 </div>
 </div>

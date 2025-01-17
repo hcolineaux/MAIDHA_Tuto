@@ -309,7 +309,7 @@ div.csl-indent {
 </div>
 <p>We can plot the observed probability.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="simple-example---binary-outcome.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/plot_12_quali.jpeg&quot;</span>,</span>
-<span id="cb15-2"><a href="simple-example---binary-outcome.html#cb15-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
+<span id="cb15-2"><a href="simple-example---binary-outcome.html#cb15-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
 <span id="cb15-3"><a href="simple-example---binary-outcome.html#cb15-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span> </span>
 <span id="cb15-4"><a href="simple-example---binary-outcome.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-5"><a href="simple-example---binary-outcome.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tot =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
@@ -337,7 +337,7 @@ div.csl-indent {
 <span id="cb17-5"><a href="simple-example---binary-outcome.html#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-6"><a href="simple-example---binary-outcome.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># intercept varies according to the stratum</span></span>
 <span id="cb17-7"><a href="simple-example---binary-outcome.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/models_1.jpeg&quot;</span>,</span>
-<span id="cb17-8"><a href="simple-example---binary-outcome.html#cb17-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
+<span id="cb17-8"><a href="simple-example---binary-outcome.html#cb17-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
 <span id="cb17-9"><a href="simple-example---binary-outcome.html#cb17-9" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(m_null, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)</span></code></pre></div>
 <pre><code>## $strata</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="simple-example---binary-outcome.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
@@ -389,7 +389,7 @@ div.csl-indent {
 <span id="cb27-12"><a href="simple-example---binary-outcome.html#cb27-12" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;61+&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;61+&quot;</span>,</span>
 <span id="cb27-13"><a href="simple-example---binary-outcome.html#cb27-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;-50&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;-50&quot;</span>,<span class="st">&quot;51-60&quot;</span>)))</span>
 <span id="cb27-14"><a href="simple-example---binary-outcome.html#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">jpeg</span>(<span class="st">&quot;img/plot.jpeg&quot;</span>,</span>
-<span id="cb27-15"><a href="simple-example---binary-outcome.html#cb27-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
+<span id="cb27-15"><a href="simple-example---binary-outcome.html#cb27-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
 <span id="cb27-16"><a href="simple-example---binary-outcome.html#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(predictions <span class="sc">%&gt;%</span> </span>
 <span id="cb27-17"><a href="simple-example---binary-outcome.html#cb27-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>predicted, <span class="at">y=</span><span class="fu">fct_reorder</span>(x,predicted,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>),</span>
 <span id="cb27-18"><a href="simple-example---binary-outcome.html#cb27-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> sex, <span class="at">linetype =</span> ethnicity))<span class="sc">+</span></span>
@@ -449,7 +449,7 @@ div.csl-indent {
 ## 3 % Age/generation   1.12
 ## 4      % Ethnicity  98.74
 ## 5    %Intersection   0.03</code></pre>
-<p>ICC is 17.79%, which is low. This differences is mainly explained by ethnicity (98.74%), sex category (0.06%) and age (1.12%).</p>
+<p>ICC is 17.79%, which is high. These differences is almost totally explained by ethnicity (98.74%).</p>
 
 </div>
 </div>

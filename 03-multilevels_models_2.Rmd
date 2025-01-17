@@ -17,7 +17,7 @@ We can plot the observed means by strata.
 
 ```{r plot_12_quanti}
 jpeg("img/plot_12_quanti.jpeg",
-         width = 1200, height = "800")
+         width = 800, height = "500")
 mydata %>% 
   group_by(strata) %>% 
   mutate(value = mean(AgeEducEnd)) %>% 
@@ -80,7 +80,7 @@ predictions <- predict_response(
     predictions$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
                            ifelse(grepl("-50", df$x), "-50","51-60")))
     jpeg("img/plot_quanti.jpeg",
-         width = 1200, height = "800")
+         width = 800, height = "500")
     print(predictions %>% 
             ggplot(aes(x=predicted, y=fct_reorder(x,predicted,.fun='median'),
                        color = sex, linetype = ethnicity))+
@@ -142,7 +142,7 @@ print(
 
 ```
 
-ICC is `r ICC_intersect`%, which is moderate. This differences is mainly explained by ethnicity (`r prop_ethnicity`%), age (`r prop_age`%) and an intersectional effect  (`r prop_intersection`%).
+ICC is `r ICC_intersect`%, which is moderate. This differences is mainly explained by ethnicity (`r prop_ethnicity`%), and, to a lesser extend, age (`r prop_age`%) and an intersectional effect  (`r prop_intersection`%).
 
 
 
