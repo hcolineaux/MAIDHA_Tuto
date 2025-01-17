@@ -26,3 +26,4 @@ more-complexe-example---quantitative-outcome
 description-3
 the-null-model-only-strata-3
 the-variance-change-3
+mining-the-intersectional-structure-of-a-population
