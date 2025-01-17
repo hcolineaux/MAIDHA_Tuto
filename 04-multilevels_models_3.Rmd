@@ -33,7 +33,7 @@ t9 %>%
        booktabs = T,
        linesep = "",
        align=c("l", "r", "l", "r", "r")) -> t9
-  kable_styling(t9, font_size = 8, 
+  kable_styling(t9, font_size = 11, 
                 latex_options = "hold_position") 
 
 ```

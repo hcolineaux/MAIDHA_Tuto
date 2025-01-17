@@ -8,10 +8,13 @@ We can start by describe the outcome by strata.
 
 
 ```{r  ,echo=F,  results='asis' , message = FALSE, warning=FALSE,  fig.pos = "H" }
+
+mydata$AirPoll_PM10d_class <- as.factor(ifelse(mydata$AirPoll_PM10 < mean(mydata$AirPoll_PM10),
+                                                                     "Below mean", "Above mean"))
 library(finalfit)
 library(knitr)
 library(kableExtra)
-dependent="AirPoll_PM10"
+dependent="AirPoll_PM10d_class"
 expl= c("Sex", 
         "Age_class", 
          "Ethnicity",
@@ -34,7 +37,7 @@ t9 %>%
        booktabs = T,
        linesep = "",
        align=c("l", "r", "l", "r", "r")) -> t9
-  kable_styling(t9, font_size = 8, 
+  kable_styling(t9, font_size = 11, 
                 latex_options = "hold_position") 
 
 ```
