@@ -22,11 +22,9 @@ mydata <- full_data %>% select(
   Sex = Demo_Sex_Bin_Men,
   Ethnicity = Demo_Ethnic_Bin_White,
   AgeEducEnd = SocioEco_Educ_AgeEnd_Num,
-  Qualification = SocioEco_Educ_QualifLev_Cat_Low,
-  Qualif_med = SocioEco_Educ_QualifLev_Cat_Medium,
   Urban = Env_RuralOrUrban_Urban,
   AirPoll_PM10 = Env_AirPoll_PM10_ugm3,
-  Loneliness = SocioEco_Social_Loneliness_Bin_Yes)
+  AlcDaily = Behav_Alc_Frequency_4Cat_3.Daily_orAlmost)
 
 rm(full_data)
 
@@ -41,14 +39,14 @@ This is an exploratory and not a confirmatory analysis, the results are purely d
 ### A first simple exemple (12 strata)
 To define strata, we choose the following variables: 
 
-- age, by classes "-50", "51-60", "61+"
-- declared binary sex category (men or women), 
-- ethnicity (white or non-white). 
+- age, by classes: "-50", "51-60", "61+"
+- declared binary sex category: men or women, 
+- ethnicity: white or non-white. 
 
-Outcomes will be 4th later intersectional categories describing cultural/intellectual ressources, i.e. 
+Outcomes will be later intersectional categories, i.e. 
 
-- either age at the end of education (quantitative variables) 
-- or level of qualification (binary variable).
+- age at the end of education (quantitative variables) 
+- life place: urban or rural (qualitative variable).
 
 There are no variables characterizing socio-economic position at the start of life in this dataset, such as parent social class or income. 
 
@@ -56,15 +54,15 @@ There are no variables characterizing socio-economic position at the start of li
 
 In a second step, we use to define intersectional strata:
 
-- age, by classes "-50", "51-60", "61+"
-- declared binary sex category (men or women), 
-- ethnicity (white or non-white)
-- level of qualification (medium/high, low)
-- and life place (rural, urban)
+- age, by classes: "-50", "51-60", "61+"
+- declared binary sex category: men or women, 
+- ethnicity: white or non-white. 
+- education: end at 16 or before, end at 17 or after
+- life place: urban or rural
 
 The outcomes were: 
 
-- feeling lonely (binary outcomes)
+- drinking alcohol daily (binary outcomes)
 - exposition to air pollution (pm10, ugm3).
 
 
@@ -85,16 +83,18 @@ mydata <- mydata %>%
     recode = list(`1` = "min:50", `2` = 51:60, `3` = "61:max")) %>% 
   mutate(Age_class = factor(Age_class, labels = c("-50", "51-60", "61+")))
 
-mydata$Qualification <- factor(round(mydata$Qualification),
-                               labels = c("Med-High Qualif.", "Low Qualif."))
-
 mydata$Urban <- factor(round(mydata$Urban),
                        labels = c("Rural", "Urban"))
 
-mydata$Loneliness <- factor(round(mydata$Loneliness),
-                       labels = c("No", "Yes"))
+mydata <- mydata %>% 
+  # recode age into three groups
+  mutate(Education = round(AgeEducEnd)) %>% 
+  recode_values(
+    select = "Education",
+    recode = list(`0` = "min:16", `1` = "17:max")) %>% 
+  mutate(Education = factor(Education, labels = c("Short Educ.", "Long Educ.")))
 
-table1::table1(~ Sex + Age + Ethnicity + AgeEducEnd + Qualification + Urban + Loneliness + AirPoll_PM10,
+table1::table1(~ Sex + Age + Ethnicity + AgeEducEnd + Education + Urban + AlcDaily + AirPoll_PM10,
        data=mydata,
     overall=c(left="Total"),
     caption="Description")
@@ -141,10 +141,10 @@ And with more categories:
 ```{r strata_2 }
 mydata$strata_2 <- ifelse(
   is.na(mydata$Sex) | is.na(mydata$Ethnicity) | 
-    is.na(mydata$Age_class) | is.na(mydata$Qualification) | is.na(mydata$Urban),
+    is.na(mydata$Age_class) | is.na(mydata$Education) | is.na(mydata$Urban),
   NA_character_,
   paste0(mydata$Sex, ", ", mydata$Ethnicity, ", ",
-         mydata$Age_class,", ", mydata$Qualification,", ", mydata$Urban)
+         mydata$Age_class,", ", mydata$Education,", ", mydata$Urban)
 )
 ```
 
@@ -219,7 +219,7 @@ df_2$sex = as.factor(ifelse(grepl("Men", df_2$x), "Men", "Women"))
 df_2$ethnicity <- as.factor(ifelse(grepl("Non White", df_2$x), "Non White", "White"))
 df_2$age <- as.factor(ifelse(grepl("61+", df_2$x), "61+",
                            ifelse(grepl("-50", df_2$x), "-50","51-60")))
-df_2$qualification <- as.factor(ifelse(grepl("Low", df_2$x), "Low", "Med-High"))
+df_2$Education <- as.factor(ifelse(grepl("Short", df_2$x), "Short", "Long"))
 df_2$LocalArea <- as.factor(ifelse(grepl("Urban", df_2$x), "Urban", "Rural"))
 
 jpeg("img/plot_stata_2.jpeg",
@@ -228,7 +228,7 @@ ggplot(data = df_2) +
   geom_col(aes(x = fct_reorder(x,n,.fun='median'), y = n,
                linewidth = age,  fill = ethnicity, alpha = LocalArea), color = "black") +
   geom_point(aes(x = fct_reorder(x,n,.fun='median'), y = n,
-                 shape = qualification,  color = sex), size =4) +
+                 shape = Education,  color = sex), size =4) +
   theme(plot.margin = margin(1,1,1.5,2, "cm"))+ 
   labs (x="", y = "N",
         fill = "Ethnicity") +

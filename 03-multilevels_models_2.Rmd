@@ -6,9 +6,7 @@ As a working example, we want to explore intersectional inequalities in educaion
 
 ```{r, message=FALSE, warning=FALSE}
 
-mydata$AgeEducEnd_class <- as.factor(ifelse(mydata$AgeEducEnd < mean(mydata$AgeEducEnd),
-                                                                     "Below mean", "Above mean"))
-table1::table1(~ Sex + Age_class + Ethnicity | AgeEducEnd_class,
+table1::table1(~ Sex + Age_class + Ethnicity | Education,
        data=mydata,
     overall=c(left="Total"),
     caption="Description by age of education end")

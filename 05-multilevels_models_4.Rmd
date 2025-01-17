@@ -11,7 +11,7 @@ mydata$AirPoll_PM10d_class <- as.factor(ifelse(mydata$AirPoll_PM10 < mean(mydata
                                                                      "Below mean", "Above mean"))
 
 table1::table1(~ Sex + Age_class + Ethnicity +
-                 Qualification + Urban | AirPoll_PM10d_class,
+                 Education + Urban | AirPoll_PM10d_class,
        data=mydata,
     overall=c(left="Total"),
     caption="Description by air pollution")
@@ -26,8 +26,7 @@ jpeg("img/plot_12_quanti_2.jpeg",
 mydata %>% 
   group_by(strata_2) %>% 
   mutate(value = mean(AirPoll_PM10)) %>% 
-  filter(Loneliness == "Yes") %>% 
-  ggplot(aes(x = fct_reorder(strata,value,.fun='median'),
+  ggplot(aes(x = fct_reorder(strata_2,value,.fun='median'),
              y =value)) +
     geom_point()  +
     labs(x = "Stratas", y = "Air pollution (pm 10)",
@@ -83,18 +82,18 @@ predictions <- predict_response(
     predictions$ethnicity <- as.factor(ifelse(grepl("Non White", predictions$x), "Non white", "White"))
     predictions$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
                            ifelse(grepl("-50", df$x), "-50","51-60")))
-    predictions$qualification <- as.factor(ifelse(grepl("Low", predictions$x), "Low", "Med-High"))
+    predictions$Education <- as.factor(ifelse(grepl("Short", predictions$x), "Short", "Long"))
     predictions$localarea <- as.factor(ifelse(grepl("Urban", predictions$x), "Urban", "Rural"))
     jpeg("img/plot_quanti_2.jpeg",
          width = 1200, height = "800")
     print(predictions %>% 
             ggplot(aes(x=predicted, y=fct_reorder(x,predicted,.fun='median'), 
                        color = sex, linetype = ethnicity))+
-            geom_point(aes(shape = qualification, alpha = localarea),size=3) +
+            geom_point(aes(shape = Education, alpha = localarea),size=3) +
             geom_linerange(aes(xmin = conf.low, xmax = conf.high, size = age)) +
             labs(y = "Sratas",
                  x = "",
-                 shape = "Qualification",
+                 shape = "Education",
                  alpha = "Life place",
                  size = "Age class",
                  color = "Sex category",
@@ -125,10 +124,10 @@ m_age <- glmmTMB(AirPoll_PM10 ~ Age_class + (1 | strata_2),
                  data = mydata)
 m_urban <- glmmTMB(AirPoll_PM10 ~ Urban + (1 | strata_2),
                        data = mydata)
-m_qualif <- glmmTMB(AirPoll_PM10 ~ Qualification + (1 | strata_2),
+m_qualif <- glmmTMB(AirPoll_PM10 ~ Education + (1 | strata_2),
                  data = mydata)
 m_full <- glmmTMB(AirPoll_PM10 ~ Age_class + Ethnicity + Sex +
-                    Urban + Qualification +  (1 | strata_2),
+                    Urban + Education +  (1 | strata_2),
                   data = mydata)
 
 v_gender <- get_variance(m_gender)
@@ -162,7 +161,7 @@ print(
   as.data.frame(
     cbind(
     parameters = c("ICC/VPC", "% Sex category", "% Age/generation",
-                   "% Ethnicity", "% Life Place", "% Qualification",
+                   "% Ethnicity", "% Life Place", "% Education",
                    "%Intersection"),
     values = c(ICC_intersect,prop_gender, prop_age, prop_ethnicity,
                prop_urban,prop_qualif, prop_intersection )

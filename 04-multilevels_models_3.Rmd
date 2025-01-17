@@ -1,6 +1,6 @@
 # More complexe example - binary outcome
 
-As a working example, we want to explore intersectional inequalities in loneliness by  intersectional strata (48 stratas).
+As a working example, we want to explore intersectional inequalities in exposition to air pollution (pm 10) by  intersectional strata (48 stratas).
 
 ## Description
 
@@ -9,10 +9,10 @@ We can start by describe the outcome by strata.
 ```{r message=FALSE, warning=FALSE}
 
 table1::table1(~ Sex + Age_class + Ethnicity +
-                 Qualification + Urban | Loneliness,
+                 Education + Urban | AlcDaily,
        data=mydata,
     overall=c(left="Total"),
-    caption="Description by qualification level")
+    caption="Description by Alcohol consumption")
 
 ```
 
@@ -24,13 +24,13 @@ jpeg("img/plot_12_quali_2.jpeg",
 mydata %>% 
   group_by(strata_2) %>% 
   mutate(tot = n()) %>% ungroup() %>% 
-  group_by(strata_2,Loneliness) %>% 
+  group_by(strata_2,AlcDaily) %>% 
   mutate(value = n()/tot) %>% 
-  filter(Loneliness == "Yes") %>% 
-  ggplot(aes(x = fct_reorder(strata,value,.fun='median'),
+  filter(AlcDaily == "Yes") %>% 
+  ggplot(aes(x = fct_reorder(strata_2,value,.fun='median'),
              y =value)) +
     geom_point()  +
-    labs(x = "Stratas", y = "Loneliness",
+    labs(x = "Stratas", y = "Daily alcohol consumption",
          title = "Observed percentage by stratas") +
   theme(axis.text.x = element_text(angle = 45,  vjust=1,  hjust=1))
 dev.off()
@@ -47,7 +47,7 @@ The null model allows us to estimate the IntraClass correlation (ICC), also know
 ```{r models_1_2,  message=FALSE, warning=FALSE}
 
 # multilevel model
-m_null <- glmmTMB(Loneliness ~ 1 + (1 | strata_2),
+m_null <- glmmTMB(AlcDaily ~ 1 + (1 | strata_2),
                   data = mydata,
                   family = binomial)
 
@@ -92,23 +92,23 @@ predictions <- predict_response(
     predictions$ethnicity <- as.factor(ifelse(grepl("Non White", predictions$x), "Non white", "White"))
     predictions$age <- as.factor(ifelse(grepl("61+", df$x), "61+",
                            ifelse(grepl("-50", df$x), "-50","51-60")))
-    predictions$qualification <- as.factor(ifelse(grepl("Low", predictions$x), "Low", "Med-High"))
+    predictions$Education <- as.factor(ifelse(grepl("Short", predictions$x), "Short", "Long"))
     predictions$localarea <- as.factor(ifelse(grepl("Urban", predictions$x), "Urban", "Rural"))
     jpeg("img/plot_2.jpeg",
          width = 1200, height = "800")
     print(predictions %>% 
             ggplot(aes(x=predicted, y=fct_reorder(x,predicted,.fun='median'), 
                        color = sex, linetype = ethnicity))+
-            geom_point(aes(shape = qualification, alpha = localarea),size=3) +
+            geom_point(aes(shape = Education, alpha = localarea),size=3) +
             geom_linerange(aes(xmin = conf.low, xmax = conf.high, size = age)) +
             labs(y = "Sratas",
                  x = "",
-                 shape = "Qualification",
+                 shape = "Education",
                  alpha = "Life place",
                  size = "Age class",
                  color = "Sex category",
                  linetype = "Ethnicity",
-                 title = "Predicted values for Loneliness") +
+                 title = "Predicted values for daily alcohol consumption") +
             theme(axis.title = element_text(size = 10)) + 
             scale_size_discrete(range = c(0.5, 1.5)) +
             scale_alpha_discrete(range = c(0.5, 1)))
@@ -126,18 +126,18 @@ To calculate the (additive) contribution of each category to the total variance,
 ```{r outputs_2_2,  message=FALSE, warning=FALSE}
 
 # models where we add each category one by one
-m_gender <- glmmTMB(Loneliness ~ Sex + (1 | strata_2),
+m_gender <- glmmTMB(AlcDaily ~ Sex + (1 | strata_2),
                     data = mydata, family=binomial)
-m_ethnicity <- glmmTMB(Loneliness ~ Ethnicity + (1 | strata_2),
+m_ethnicity <- glmmTMB(AlcDaily ~ Ethnicity + (1 | strata_2),
                        data = mydata, family=binomial)
-m_age <- glmmTMB(Loneliness ~ Age_class + (1 | strata_2),
+m_age <- glmmTMB(AlcDaily ~ Age_class + (1 | strata_2),
                  data = mydata, family=binomial)
-m_urban <- glmmTMB(Loneliness ~ Urban + (1 | strata_2),
+m_urban <- glmmTMB(AlcDaily ~ Urban + (1 | strata_2),
                        data = mydata, family=binomial)
-m_qualif <- glmmTMB(Loneliness ~ Qualification + (1 | strata_2),
+m_qualif <- glmmTMB(AlcDaily ~ Education + (1 | strata_2),
                  data = mydata, family=binomial)
-m_full <- glmmTMB(Loneliness ~ Age_class + Ethnicity + Sex +
-                    Urban + Qualification +  (1 | strata_2),
+m_full <- glmmTMB(AlcDaily ~ Age_class + Ethnicity + Sex +
+                    Urban + Education +  (1 | strata_2),
                   data = mydata, family=binomial)
 
 v_gender <- get_variance(m_gender)
@@ -171,7 +171,7 @@ print(
   as.data.frame(
     cbind(
     parameters = c("ICC/VPC", "% Sex category", "% Age/generation",
-                   "% Ethnicity", "% Life Place", "% Qualification",
+                   "% Ethnicity", "% Life Place", "% Education",
                    "%Intersection"),
     values = c(ICC_intersect,prop_gender, prop_age, prop_ethnicity,
                prop_urban,prop_qualif, prop_intersection )
@@ -179,7 +179,7 @@ print(
 
 ```
 
-ICC is `r ICC_intersect`%, which is low. This differences is mainly explained by ethnicity (`r prop_ethnicity`%), life place (`r prop_urban`%) and sex category (`r prop_gender`%).
+ICC is `r ICC_intersect`%, which is low. This differences is mainly explained by ethnicity (`r prop_ethnicity`%), sex category (`r prop_gender`%) and life place (`r prop_urban`%).
 
 
 
