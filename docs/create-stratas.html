@@ -233,14 +233,14 @@ div.csl-indent {
 <h3><span class="header-section-number">2.1.1</span> A first simple exemple (12 strata)<a href="create-stratas.html#a-first-simple-exemple-12-strata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To define strata, we choose the following variables:</p>
 <ul>
-<li>age, by classes “-50,” “51-60,” “61+”</li>
-<li>declared binary sex category (men or women),</li>
-<li>ethnicity (white or non-white).</li>
+<li>age, by classes: “-50,” “51-60,” “61+”</li>
+<li>declared binary sex category: men or women,</li>
+<li>ethnicity: white or non-white.</li>
 </ul>
-<p>Outcomes will be 4th later intersectional categories describing cultural/intellectual ressources, i.e. </p>
+<p>Outcomes will be later intersectional categories, i.e. </p>
 <ul>
-<li>either age at the end of education (quantitative variables)</li>
-<li>or level of qualification (binary variable).</li>
+<li>age at the end of education (quantitative variables)</li>
+<li>life place: urban or rural (qualitative variable).</li>
 </ul>
 <p>There are no variables characterizing socio-economic position at the start of life in this dataset, such as parent social class or income.</p>
 </div>
@@ -248,15 +248,15 @@ div.csl-indent {
 <h3><span class="header-section-number">2.1.2</span> A second exemple (48 strata)<a href="create-stratas.html#a-second-exemple-48-strata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In a second step, we use to define intersectional strata:</p>
 <ul>
-<li>age, by classes “-50,” “51-60,” “61+”</li>
-<li>declared binary sex category (men or women),</li>
-<li>ethnicity (white or non-white)</li>
-<li>level of qualification (medium/high, low)</li>
-<li>and life place (rural, urban)</li>
+<li>age, by classes: “-50,” “51-60,” “61+”</li>
+<li>declared binary sex category: men or women,</li>
+<li>ethnicity: white or non-white.</li>
+<li>education: end at 16 or before, end at 17 or after</li>
+<li>life place: urban or rural</li>
 </ul>
 <p>The outcomes were:</p>
 <ul>
-<li>feeling lonely (binary outcomes)</li>
+<li>drinking alcohol daily (binary outcomes)</li>
 <li>exposition to air pollution (pm10, ugm3).</li>
 </ul>
 </div>
@@ -277,19 +277,21 @@ div.csl-indent {
 <span id="cb1-12"><a href="create-stratas.html#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">recode =</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;min:50&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">51</span><span class="sc">:</span><span class="dv">60</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;61:max&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-13"><a href="create-stratas.html#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age_class =</span> <span class="fu">factor</span>(Age_class, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;-50&quot;</span>, <span class="st">&quot;51-60&quot;</span>, <span class="st">&quot;61+&quot;</span>)))</span>
 <span id="cb1-14"><a href="create-stratas.html#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="create-stratas.html#cb1-15" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>Qualification <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">round</span>(mydata<span class="sc">$</span>Qualification),</span>
-<span id="cb1-16"><a href="create-stratas.html#cb1-16" aria-hidden="true" tabindex="-1"></a>                               <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Med-High Qualif.&quot;</span>, <span class="st">&quot;Low Qualif.&quot;</span>))</span>
+<span id="cb1-15"><a href="create-stratas.html#cb1-15" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>Urban <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">round</span>(mydata<span class="sc">$</span>Urban),</span>
+<span id="cb1-16"><a href="create-stratas.html#cb1-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Rural&quot;</span>, <span class="st">&quot;Urban&quot;</span>))</span>
 <span id="cb1-17"><a href="create-stratas.html#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="create-stratas.html#cb1-18" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>Urban <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">round</span>(mydata<span class="sc">$</span>Urban),</span>
-<span id="cb1-19"><a href="create-stratas.html#cb1-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Rural&quot;</span>, <span class="st">&quot;Urban&quot;</span>))</span>
-<span id="cb1-20"><a href="create-stratas.html#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="create-stratas.html#cb1-21" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>Loneliness <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">round</span>(mydata<span class="sc">$</span>Loneliness),</span>
-<span id="cb1-22"><a href="create-stratas.html#cb1-22" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>))</span>
-<span id="cb1-23"><a href="create-stratas.html#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="create-stratas.html#cb1-24" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age <span class="sc">+</span> Ethnicity <span class="sc">+</span> AgeEducEnd <span class="sc">+</span> Qualification <span class="sc">+</span> Urban <span class="sc">+</span> Loneliness <span class="sc">+</span> AirPoll_PM10,</span>
-<span id="cb1-25"><a href="create-stratas.html#cb1-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
-<span id="cb1-26"><a href="create-stratas.html#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
-<span id="cb1-27"><a href="create-stratas.html#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description&quot;</span>)</span></code></pre></div>
+<span id="cb1-18"><a href="create-stratas.html#cb1-18" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> mydata <span class="sc">%&gt;%</span> </span>
+<span id="cb1-19"><a href="create-stratas.html#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># recode age into three groups</span></span>
+<span id="cb1-20"><a href="create-stratas.html#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Education =</span> <span class="fu">round</span>(AgeEducEnd)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-21"><a href="create-stratas.html#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">recode_values</span>(</span>
+<span id="cb1-22"><a href="create-stratas.html#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">select =</span> <span class="st">&quot;Education&quot;</span>,</span>
+<span id="cb1-23"><a href="create-stratas.html#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">recode =</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">0</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;min:16&quot;</span>, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;17:max&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-24"><a href="create-stratas.html#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Education =</span> <span class="fu">factor</span>(Education, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Short Educ.&quot;</span>, <span class="st">&quot;Long Educ.&quot;</span>)))</span>
+<span id="cb1-25"><a href="create-stratas.html#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="create-stratas.html#cb1-26" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age <span class="sc">+</span> Ethnicity <span class="sc">+</span> AgeEducEnd <span class="sc">+</span> Education <span class="sc">+</span> Urban <span class="sc">+</span> AlcDaily <span class="sc">+</span> AirPoll_PM10,</span>
+<span id="cb1-27"><a href="create-stratas.html#cb1-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
+<span id="cb1-28"><a href="create-stratas.html#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
+<span id="cb1-29"><a href="create-stratas.html#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description&quot;</span>)</span></code></pre></div>
 <div class="Rtable1"><table class="Rtable1"><caption>Description</caption>
 
 <thead>
@@ -348,16 +350,16 @@ div.csl-indent {
 <td class='lastrow'>16.1 [5.00, 35.0]</td>
 </tr>
 <tr>
-<td class='rowlabel firstrow'>Qualification</td>
+<td class='rowlabel firstrow'>Education</td>
 <td class='firstrow'></td>
 </tr>
 <tr>
-<td class='rowlabel'>Med-High Qualif.</td>
-<td>356623 (71.0%)</td>
+<td class='rowlabel'>Short Educ.</td>
+<td>284626 (56.6%)</td>
 </tr>
 <tr>
-<td class='rowlabel lastrow'>Low Qualif.</td>
-<td class='lastrow'>145838 (29.0%)</td>
+<td class='rowlabel lastrow'>Long Educ.</td>
+<td class='lastrow'>217835 (43.4%)</td>
 </tr>
 <tr>
 <td class='rowlabel firstrow'>Urban</td>
@@ -372,16 +374,16 @@ div.csl-indent {
 <td class='lastrow'>433506 (86.3%)</td>
 </tr>
 <tr>
-<td class='rowlabel firstrow'>Loneliness</td>
+<td class='rowlabel firstrow'>AlcDaily</td>
 <td class='firstrow'></td>
 </tr>
 <tr>
-<td class='rowlabel'>No</td>
-<td>410974 (81.8%)</td>
+<td class='rowlabel'>Mean (SD)</td>
+<td>0.203 (0.402)</td>
 </tr>
 <tr>
-<td class='rowlabel lastrow'>Yes</td>
-<td class='lastrow'>91487 (18.2%)</td>
+<td class='rowlabel lastrow'>Median [Min, Max]</td>
+<td class='lastrow'>0 [0, 1.00]</td>
 </tr>
 <tr>
 <td class='rowlabel firstrow'>AirPoll_PM10</td>
@@ -490,10 +492,10 @@ div.csl-indent {
 <p>And with more categories:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="create-stratas.html#cb4-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>strata_2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
 <span id="cb4-2"><a href="create-stratas.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(mydata<span class="sc">$</span>Sex) <span class="sc">|</span> <span class="fu">is.na</span>(mydata<span class="sc">$</span>Ethnicity) <span class="sc">|</span> </span>
-<span id="cb4-3"><a href="create-stratas.html#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(mydata<span class="sc">$</span>Age_class) <span class="sc">|</span> <span class="fu">is.na</span>(mydata<span class="sc">$</span>Qualification) <span class="sc">|</span> <span class="fu">is.na</span>(mydata<span class="sc">$</span>Urban),</span>
+<span id="cb4-3"><a href="create-stratas.html#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(mydata<span class="sc">$</span>Age_class) <span class="sc">|</span> <span class="fu">is.na</span>(mydata<span class="sc">$</span>Education) <span class="sc">|</span> <span class="fu">is.na</span>(mydata<span class="sc">$</span>Urban),</span>
 <span id="cb4-4"><a href="create-stratas.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">NA_character_</span>,</span>
 <span id="cb4-5"><a href="create-stratas.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(mydata<span class="sc">$</span>Sex, <span class="st">&quot;, &quot;</span>, mydata<span class="sc">$</span>Ethnicity, <span class="st">&quot;, &quot;</span>,</span>
-<span id="cb4-6"><a href="create-stratas.html#cb4-6" aria-hidden="true" tabindex="-1"></a>         mydata<span class="sc">$</span>Age_class,<span class="st">&quot;, &quot;</span>, mydata<span class="sc">$</span>Qualification,<span class="st">&quot;, &quot;</span>, mydata<span class="sc">$</span>Urban)</span>
+<span id="cb4-6"><a href="create-stratas.html#cb4-6" aria-hidden="true" tabindex="-1"></a>         mydata<span class="sc">$</span>Age_class,<span class="st">&quot;, &quot;</span>, mydata<span class="sc">$</span>Education,<span class="st">&quot;, &quot;</span>, mydata<span class="sc">$</span>Urban)</span>
 <span id="cb4-7"><a href="create-stratas.html#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>We have 48 stratas</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="create-stratas.html#cb5-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>strata_2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(mydata<span class="sc">$</span>strata_2)</span>
@@ -516,196 +518,196 @@ div.csl-indent {
 <td class='firstrow'></td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, -50, Low Qualif., Rural</td>
-<td>23 (0.0%)</td>
+<td class='rowlabel'>Men, Non White, -50, Long Educ., Rural</td>
+<td>90 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, -50, Low Qualif., Urban</td>
-<td>1254 (0.2%)</td>
+<td class='rowlabel'>Men, Non White, -50, Long Educ., Urban</td>
+<td>3432 (0.7%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, -50, Med-High Qualif., Rural</td>
-<td>111 (0.0%)</td>
+<td class='rowlabel'>Men, Non White, -50, Short Educ., Rural</td>
+<td>44 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, -50, Med-High Qualif., Urban</td>
-<td>4361 (0.9%)</td>
+<td class='rowlabel'>Men, Non White, -50, Short Educ., Urban</td>
+<td>2183 (0.4%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, 51-60, Low Qualif., Rural</td>
-<td>24 (0.0%)</td>
+<td class='rowlabel'>Men, Non White, 51-60, Long Educ., Rural</td>
+<td>71 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, 51-60, Low Qualif., Urban</td>
-<td>739 (0.1%)</td>
+<td class='rowlabel'>Men, Non White, 51-60, Long Educ., Urban</td>
+<td>2217 (0.4%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, 51-60, Med-High Qualif., Rural</td>
-<td>96 (0.0%)</td>
+<td class='rowlabel'>Men, Non White, 51-60, Short Educ., Rural</td>
+<td>49 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, 51-60, Med-High Qualif., Urban</td>
-<td>2997 (0.6%)</td>
+<td class='rowlabel'>Men, Non White, 51-60, Short Educ., Urban</td>
+<td>1519 (0.3%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, 61+, Low Qualif., Rural</td>
-<td>13 (0.0%)</td>
+<td class='rowlabel'>Men, Non White, 61+, Long Educ., Rural</td>
+<td>54 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, 61+, Low Qualif., Urban</td>
-<td>531 (0.1%)</td>
+<td class='rowlabel'>Men, Non White, 61+, Long Educ., Urban</td>
+<td>1523 (0.3%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, 61+, Med-High Qualif., Rural</td>
-<td>77 (0.0%)</td>
+<td class='rowlabel'>Men, Non White, 61+, Short Educ., Rural</td>
+<td>36 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, Non White, 61+, Med-High Qualif., Urban</td>
-<td>2133 (0.4%)</td>
+<td class='rowlabel'>Men, Non White, 61+, Short Educ., Urban</td>
+<td>1141 (0.2%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, -50, Low Qualif., Rural</td>
-<td>2088 (0.4%)</td>
+<td class='rowlabel'>Men, White, -50, Long Educ., Rural</td>
+<td>3453 (0.7%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, -50, Low Qualif., Urban</td>
-<td>16687 (3.3%)</td>
+<td class='rowlabel'>Men, White, -50, Long Educ., Urban</td>
+<td>22408 (4.5%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, -50, Med-High Qualif., Rural</td>
-<td>4483 (0.9%)</td>
+<td class='rowlabel'>Men, White, -50, Short Educ., Rural</td>
+<td>3118 (0.6%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, -50, Med-High Qualif., Urban</td>
-<td>30471 (6.1%)</td>
+<td class='rowlabel'>Men, White, -50, Short Educ., Urban</td>
+<td>24750 (4.9%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, 51-60, Low Qualif., Rural</td>
-<td>2350 (0.5%)</td>
+<td class='rowlabel'>Men, White, 51-60, Long Educ., Rural</td>
+<td>5121 (1.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, 51-60, Low Qualif., Urban</td>
-<td>16154 (3.2%)</td>
+<td class='rowlabel'>Men, White, 51-60, Long Educ., Urban</td>
+<td>27890 (5.6%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, 51-60, Med-High Qualif., Rural</td>
-<td>7991 (1.6%)</td>
+<td class='rowlabel'>Men, White, 51-60, Short Educ., Rural</td>
+<td>5220 (1.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, 51-60, Med-High Qualif., Urban</td>
-<td>47382 (9.4%)</td>
+<td class='rowlabel'>Men, White, 51-60, Short Educ., Urban</td>
+<td>35646 (7.1%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, 61+, Low Qualif., Rural</td>
-<td>3058 (0.6%)</td>
+<td class='rowlabel'>Men, White, 61+, Long Educ., Rural</td>
+<td>5939 (1.2%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, 61+, Low Qualif., Urban</td>
-<td>17290 (3.4%)</td>
+<td class='rowlabel'>Men, White, 61+, Long Educ., Urban</td>
+<td>25643 (5.1%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, 61+, Med-High Qualif., Rural</td>
-<td>10749 (2.1%)</td>
+<td class='rowlabel'>Men, White, 61+, Short Educ., Rural</td>
+<td>7868 (1.6%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Men, White, 61+, Med-High Qualif., Urban</td>
-<td>58045 (11.6%)</td>
+<td class='rowlabel'>Men, White, 61+, Short Educ., Urban</td>
+<td>49692 (9.9%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, -50, Low Qualif., Rural</td>
-<td>51 (0.0%)</td>
+<td class='rowlabel'>Women, Non White, -50, Long Educ., Rural</td>
+<td>137 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, -50, Low Qualif., Urban</td>
-<td>1698 (0.3%)</td>
+<td class='rowlabel'>Women, Non White, -50, Long Educ., Urban</td>
+<td>3949 (0.8%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, -50, Med-High Qualif., Rural</td>
-<td>152 (0.0%)</td>
+<td class='rowlabel'>Women, Non White, -50, Short Educ., Rural</td>
+<td>66 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, -50, Med-High Qualif., Urban</td>
-<td>4751 (0.9%)</td>
+<td class='rowlabel'>Women, Non White, -50, Short Educ., Urban</td>
+<td>2500 (0.5%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, 51-60, Low Qualif., Rural</td>
-<td>27 (0.0%)</td>
+<td class='rowlabel'>Women, Non White, 51-60, Long Educ., Rural</td>
+<td>101 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, 51-60, Low Qualif., Urban</td>
-<td>1406 (0.3%)</td>
+<td class='rowlabel'>Women, Non White, 51-60, Long Educ., Urban</td>
+<td>2931 (0.6%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, 51-60, Med-High Qualif., Rural</td>
-<td>132 (0.0%)</td>
+<td class='rowlabel'>Women, Non White, 51-60, Short Educ., Rural</td>
+<td>58 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, 51-60, Med-High Qualif., Urban</td>
-<td>3584 (0.7%)</td>
+<td class='rowlabel'>Women, Non White, 51-60, Short Educ., Urban</td>
+<td>2059 (0.4%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, 61+, Low Qualif., Rural</td>
-<td>26 (0.0%)</td>
+<td class='rowlabel'>Women, Non White, 61+, Long Educ., Rural</td>
+<td>54 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, 61+, Low Qualif., Urban</td>
-<td>624 (0.1%)</td>
+<td class='rowlabel'>Women, Non White, 61+, Long Educ., Urban</td>
+<td>1561 (0.3%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, 61+, Med-High Qualif., Rural</td>
-<td>63 (0.0%)</td>
+<td class='rowlabel'>Women, Non White, 61+, Short Educ., Rural</td>
+<td>35 (0.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, Non White, 61+, Med-High Qualif., Urban</td>
-<td>2164 (0.4%)</td>
+<td class='rowlabel'>Women, Non White, 61+, Short Educ., Urban</td>
+<td>1227 (0.2%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, -50, Low Qualif., Rural</td>
-<td>2811 (0.6%)</td>
+<td class='rowlabel'>Women, White, -50, Long Educ., Rural</td>
+<td>4914 (1.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, -50, Low Qualif., Urban</td>
-<td>20094 (4.0%)</td>
+<td class='rowlabel'>Women, White, -50, Long Educ., Urban</td>
+<td>29922 (6.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, -50, Med-High Qualif., Rural</td>
-<td>5729 (1.1%)</td>
+<td class='rowlabel'>Women, White, -50, Short Educ., Rural</td>
+<td>3626 (0.7%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, -50, Med-High Qualif., Urban</td>
-<td>37381 (7.4%)</td>
+<td class='rowlabel'>Women, White, -50, Short Educ., Urban</td>
+<td>27553 (5.5%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, 51-60, Low Qualif., Rural</td>
-<td>3965 (0.8%)</td>
+<td class='rowlabel'>Women, White, 51-60, Long Educ., Rural</td>
+<td>7112 (1.4%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, 51-60, Low Qualif., Urban</td>
-<td>24592 (4.9%)</td>
+<td class='rowlabel'>Women, White, 51-60, Long Educ., Urban</td>
+<td>35356 (7.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, 51-60, Med-High Qualif., Rural</td>
-<td>9856 (2.0%)</td>
+<td class='rowlabel'>Women, White, 51-60, Short Educ., Rural</td>
+<td>6709 (1.3%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, 51-60, Med-High Qualif., Urban</td>
-<td>55927 (11.1%)</td>
+<td class='rowlabel'>Women, White, 51-60, Short Educ., Urban</td>
+<td>45163 (9.0%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, 61+, Low Qualif., Rural</td>
-<td>4801 (1.0%)</td>
+<td class='rowlabel'>Women, White, 61+, Long Educ., Rural</td>
+<td>6210 (1.2%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, 61+, Low Qualif., Urban</td>
-<td>25532 (5.1%)</td>
+<td class='rowlabel'>Women, White, 61+, Long Educ., Urban</td>
+<td>27747 (5.5%)</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women, White, 61+, Med-High Qualif., Rural</td>
-<td>10279 (2.0%)</td>
+<td class='rowlabel'>Women, White, 61+, Short Educ., Rural</td>
+<td>8870 (1.8%)</td>
 </tr>
 <tr>
-<td class='rowlabel lastrow'>Women, White, 61+, Med-High Qualif., Urban</td>
-<td class='lastrow'>57709 (11.5%)</td>
+<td class='rowlabel lastrow'>Women, White, 61+, Short Educ., Urban</td>
+<td class='lastrow'>55494 (11.0%)</td>
 </tr>
 </tbody>
 </table>
@@ -714,9 +716,9 @@ div.csl-indent {
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="create-stratas.html#cb6-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">data_tabulate</span>(mydata<span class="sc">$</span>strata_2)</span>
 <span id="cb6-2"><a href="create-stratas.html#cb6-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> tab[<span class="dv">1</span><span class="sc">:</span><span class="dv">48</span>,]</span>
 <span id="cb6-3"><a href="create-stratas.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(tab<span class="sc">$</span>N)</span></code></pre></div>
-<pre><code>## [1] 13</code></pre>
+<pre><code>## [1] 35</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="create-stratas.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(tab<span class="sc">$</span>N)</span></code></pre></div>
-<pre><code>## [1] 58045</code></pre>
+<pre><code>## [1] 55494</code></pre>
 </div>
 </div>
 <div id="plots-the-stratas-distribution" class="section level2 hasAnchor" number="2.4">
@@ -761,7 +763,7 @@ div.csl-indent {
 <span id="cb12-5"><a href="create-stratas.html#cb12-5" aria-hidden="true" tabindex="-1"></a>df_2<span class="sc">$</span>ethnicity <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Non White&quot;</span>, df_2<span class="sc">$</span>x), <span class="st">&quot;Non White&quot;</span>, <span class="st">&quot;White&quot;</span>))</span>
 <span id="cb12-6"><a href="create-stratas.html#cb12-6" aria-hidden="true" tabindex="-1"></a>df_2<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;61+&quot;</span>, df_2<span class="sc">$</span>x), <span class="st">&quot;61+&quot;</span>,</span>
 <span id="cb12-7"><a href="create-stratas.html#cb12-7" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;-50&quot;</span>, df_2<span class="sc">$</span>x), <span class="st">&quot;-50&quot;</span>,<span class="st">&quot;51-60&quot;</span>)))</span>
-<span id="cb12-8"><a href="create-stratas.html#cb12-8" aria-hidden="true" tabindex="-1"></a>df_2<span class="sc">$</span>qualification <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Low&quot;</span>, df_2<span class="sc">$</span>x), <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;Med-High&quot;</span>))</span>
+<span id="cb12-8"><a href="create-stratas.html#cb12-8" aria-hidden="true" tabindex="-1"></a>df_2<span class="sc">$</span>Education <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Short&quot;</span>, df_2<span class="sc">$</span>x), <span class="st">&quot;Short&quot;</span>, <span class="st">&quot;Long&quot;</span>))</span>
 <span id="cb12-9"><a href="create-stratas.html#cb12-9" aria-hidden="true" tabindex="-1"></a>df_2<span class="sc">$</span>LocalArea <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Urban&quot;</span>, df_2<span class="sc">$</span>x), <span class="st">&quot;Urban&quot;</span>, <span class="st">&quot;Rural&quot;</span>))</span>
 <span id="cb12-10"><a href="create-stratas.html#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-11"><a href="create-stratas.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/plot_stata_2.jpeg&quot;</span>,</span>
@@ -770,7 +772,7 @@ div.csl-indent {
 <span id="cb12-14"><a href="create-stratas.html#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(x,n,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>), <span class="at">y =</span> n,</span>
 <span id="cb12-15"><a href="create-stratas.html#cb12-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth =</span> age,  <span class="at">fill =</span> ethnicity, <span class="at">alpha =</span> LocalArea), <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb12-16"><a href="create-stratas.html#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(x,n,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>), <span class="at">y =</span> n,</span>
-<span id="cb12-17"><a href="create-stratas.html#cb12-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape =</span> qualification,  <span class="at">color =</span> sex), <span class="at">size =</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb12-17"><a href="create-stratas.html#cb12-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape =</span> Education,  <span class="at">color =</span> sex), <span class="at">size =</span><span class="dv">4</span>) <span class="sc">+</span></span>
 <span id="cb12-18"><a href="create-stratas.html#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.5</span>,<span class="dv">2</span>, <span class="st">&quot;cm&quot;</span>))<span class="sc">+</span> </span>
 <span id="cb12-19"><a href="create-stratas.html#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span> (<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;N&quot;</span>,</span>
 <span id="cb12-20"><a href="create-stratas.html#cb12-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">&quot;Ethnicity&quot;</span>) <span class="sc">+</span></span>

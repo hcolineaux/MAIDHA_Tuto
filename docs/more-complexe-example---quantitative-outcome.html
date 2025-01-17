@@ -225,7 +225,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="more-complexe-example---quantitative-outcome" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">6</span> More complexe example - quantitative outcome<a href="more-complexe-example---quantitative-outcome.html#more-complexe-example---quantitative-outcome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>As a working example, we want to explore intersectional inequalities in loneliness by intersectional strata (48 stratas).</p>
+<p>As a working example, we want to explore intersectional inequalities in air pollution exposition by intersectional strata (48 stratas).</p>
 <div id="description-3" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Description<a href="more-complexe-example---quantitative-outcome.html#description-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We can start by describe the outcome by strata.</p>
@@ -233,7 +233,7 @@ div.csl-indent {
 <span id="cb62-2"><a href="more-complexe-example---quantitative-outcome.html#cb62-2" aria-hidden="true" tabindex="-1"></a>                                                                     <span class="st">&quot;Below mean&quot;</span>, <span class="st">&quot;Above mean&quot;</span>))</span>
 <span id="cb62-3"><a href="more-complexe-example---quantitative-outcome.html#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-4"><a href="more-complexe-example---quantitative-outcome.html#cb62-4" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">+</span></span>
-<span id="cb62-5"><a href="more-complexe-example---quantitative-outcome.html#cb62-5" aria-hidden="true" tabindex="-1"></a>                 Qualification <span class="sc">+</span> Urban <span class="sc">|</span> AirPoll_PM10d_class,</span>
+<span id="cb62-5"><a href="more-complexe-example---quantitative-outcome.html#cb62-5" aria-hidden="true" tabindex="-1"></a>                 Education <span class="sc">+</span> Urban <span class="sc">|</span> AirPoll_PM10d_class,</span>
 <span id="cb62-6"><a href="more-complexe-example---quantitative-outcome.html#cb62-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
 <span id="cb62-7"><a href="more-complexe-example---quantitative-outcome.html#cb62-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
 <span id="cb62-8"><a href="more-complexe-example---quantitative-outcome.html#cb62-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by air pollution&quot;</span>)</span></code></pre></div>
@@ -309,22 +309,22 @@ div.csl-indent {
 <td class='lastrow'>273531 (96.7%)</td>
 </tr>
 <tr>
-<td class='rowlabel firstrow'>Qualification</td>
+<td class='rowlabel firstrow'>Education</td>
 <td class='firstrow'></td>
 <td class='firstrow'></td>
 <td class='firstrow'></td>
 </tr>
 <tr>
-<td class='rowlabel'>Med-High Qualif.</td>
-<td>356623 (71.0%)</td>
-<td>157398 (71.7%)</td>
-<td>199225 (70.4%)</td>
+<td class='rowlabel'>Short Educ.</td>
+<td>284626 (56.6%)</td>
+<td>123781 (56.4%)</td>
+<td>160845 (56.8%)</td>
 </tr>
 <tr>
-<td class='rowlabel lastrow'>Low Qualif.</td>
-<td class='lastrow'>145838 (29.0%)</td>
-<td class='lastrow'>62081 (28.3%)</td>
-<td class='lastrow'>83757 (29.6%)</td>
+<td class='rowlabel lastrow'>Long Educ.</td>
+<td class='lastrow'>217835 (43.4%)</td>
+<td class='lastrow'>95698 (43.6%)</td>
+<td class='lastrow'>122137 (43.2%)</td>
 </tr>
 <tr>
 <td class='rowlabel firstrow'>Urban</td>
@@ -353,14 +353,13 @@ div.csl-indent {
 <span id="cb63-3"><a href="more-complexe-example---quantitative-outcome.html#cb63-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span> </span>
 <span id="cb63-4"><a href="more-complexe-example---quantitative-outcome.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata_2) <span class="sc">%&gt;%</span> </span>
 <span id="cb63-5"><a href="more-complexe-example---quantitative-outcome.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">mean</span>(AirPoll_PM10)) <span class="sc">%&gt;%</span> </span>
-<span id="cb63-6"><a href="more-complexe-example---quantitative-outcome.html#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Loneliness <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb63-7"><a href="more-complexe-example---quantitative-outcome.html#cb63-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(strata,value,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>),</span>
-<span id="cb63-8"><a href="more-complexe-example---quantitative-outcome.html#cb63-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span>value)) <span class="sc">+</span></span>
-<span id="cb63-9"><a href="more-complexe-example---quantitative-outcome.html#cb63-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
-<span id="cb63-10"><a href="more-complexe-example---quantitative-outcome.html#cb63-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Stratas&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Air pollution (pm 10)&quot;</span>,</span>
-<span id="cb63-11"><a href="more-complexe-example---quantitative-outcome.html#cb63-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">&quot;Observed means by stratas&quot;</span>) <span class="sc">+</span></span>
-<span id="cb63-12"><a href="more-complexe-example---quantitative-outcome.html#cb63-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,  <span class="at">vjust=</span><span class="dv">1</span>,  <span class="at">hjust=</span><span class="dv">1</span>))</span>
-<span id="cb63-13"><a href="more-complexe-example---quantitative-outcome.html#cb63-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<span id="cb63-6"><a href="more-complexe-example---quantitative-outcome.html#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(strata_2,value,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>),</span>
+<span id="cb63-7"><a href="more-complexe-example---quantitative-outcome.html#cb63-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span>value)) <span class="sc">+</span></span>
+<span id="cb63-8"><a href="more-complexe-example---quantitative-outcome.html#cb63-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
+<span id="cb63-9"><a href="more-complexe-example---quantitative-outcome.html#cb63-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Stratas&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Air pollution (pm 10)&quot;</span>,</span>
+<span id="cb63-10"><a href="more-complexe-example---quantitative-outcome.html#cb63-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">&quot;Observed means by stratas&quot;</span>) <span class="sc">+</span></span>
+<span id="cb63-11"><a href="more-complexe-example---quantitative-outcome.html#cb63-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,  <span class="at">vjust=</span><span class="dv">1</span>,  <span class="at">hjust=</span><span class="dv">1</span>))</span>
+<span id="cb63-12"><a href="more-complexe-example---quantitative-outcome.html#cb63-12" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 <pre><code>## png 
 ##   2</code></pre>
 <p><img src="img/plot_12_quanti_2.jpeg" /></p>
@@ -378,32 +377,32 @@ div.csl-indent {
 ## Data: mydata
 ## 
 ##      AIC      BIC   logLik deviance df.resid 
-##  2013053  2013086 -1006524  2013047   502458 
+##  2012853  2012886 -1006424  2012847   502458 
 ## 
 ## Random effects:
 ## 
 ## Conditional model:
 ##  Groups   Name        Variance Std.Dev.
-##  strata_2 (Intercept) 0.6848   0.8275  
-##  Residual             3.2153   1.7931  
+##  strata_2 (Intercept) 0.6956   0.834   
+##  Residual             3.2140   1.793   
 ## Number of obs: 502461, groups:  strata_2, 48
 ## 
-## Dispersion estimate for gaussian family (sigma^2): 3.22 
+## Dispersion estimate for gaussian family (sigma^2): 3.21 
 ## 
 ## Conditional model:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)  15.9460     0.1212   131.6   &lt;2e-16 ***
+## (Intercept)  15.9324     0.1216     131   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="more-complexe-example---quantitative-outcome.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the variances:</span></span>
 <span id="cb68-2"><a href="more-complexe-example---quantitative-outcome.html#cb68-2" aria-hidden="true" tabindex="-1"></a>v_null <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_null)</span>
 <span id="cb68-3"><a href="more-complexe-example---quantitative-outcome.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co"># between stratas variance:</span></span>
 <span id="cb68-4"><a href="more-complexe-example---quantitative-outcome.html#cb68-4" aria-hidden="true" tabindex="-1"></a>v_null<span class="sc">$</span>var.random</span></code></pre></div>
-<pre><code>## [1] 0.6847811</code></pre>
+<pre><code>## [1] 0.6956251</code></pre>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="more-complexe-example---quantitative-outcome.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># intraclass correlation </span></span>
 <span id="cb70-2"><a href="more-complexe-example---quantitative-outcome.html#cb70-2" aria-hidden="true" tabindex="-1"></a>ICC_intersect <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">icc</span>(m_null)<span class="sc">$</span>ICC_unadjusted<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
 <span id="cb70-3"><a href="more-complexe-example---quantitative-outcome.html#cb70-3" aria-hidden="true" tabindex="-1"></a>ICC_intersect</span></code></pre></div>
-<pre><code>## [1] 17.56</code></pre>
+<pre><code>## [1] 17.79</code></pre>
 <p>Plot of the predicted values by strata:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="more-complexe-example---quantitative-outcome.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
 <span id="cb72-2"><a href="more-complexe-example---quantitative-outcome.html#cb72-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict_response</span>(</span>
@@ -418,18 +417,18 @@ div.csl-indent {
 <span id="cb72-11"><a href="more-complexe-example---quantitative-outcome.html#cb72-11" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>ethnicity <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Non White&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Non white&quot;</span>, <span class="st">&quot;White&quot;</span>))</span>
 <span id="cb72-12"><a href="more-complexe-example---quantitative-outcome.html#cb72-12" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;61+&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;61+&quot;</span>,</span>
 <span id="cb72-13"><a href="more-complexe-example---quantitative-outcome.html#cb72-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;-50&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;-50&quot;</span>,<span class="st">&quot;51-60&quot;</span>)))</span>
-<span id="cb72-14"><a href="more-complexe-example---quantitative-outcome.html#cb72-14" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>qualification <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Low&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;Med-High&quot;</span>))</span>
+<span id="cb72-14"><a href="more-complexe-example---quantitative-outcome.html#cb72-14" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>Education <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Short&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Short&quot;</span>, <span class="st">&quot;Long&quot;</span>))</span>
 <span id="cb72-15"><a href="more-complexe-example---quantitative-outcome.html#cb72-15" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>localarea <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Urban&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Urban&quot;</span>, <span class="st">&quot;Rural&quot;</span>))</span>
 <span id="cb72-16"><a href="more-complexe-example---quantitative-outcome.html#cb72-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">jpeg</span>(<span class="st">&quot;img/plot_quanti_2.jpeg&quot;</span>,</span>
 <span id="cb72-17"><a href="more-complexe-example---quantitative-outcome.html#cb72-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="st">&quot;800&quot;</span>)</span>
 <span id="cb72-18"><a href="more-complexe-example---quantitative-outcome.html#cb72-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(predictions <span class="sc">%&gt;%</span> </span>
 <span id="cb72-19"><a href="more-complexe-example---quantitative-outcome.html#cb72-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>predicted, <span class="at">y=</span><span class="fu">fct_reorder</span>(x,predicted,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>), </span>
 <span id="cb72-20"><a href="more-complexe-example---quantitative-outcome.html#cb72-20" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> sex, <span class="at">linetype =</span> ethnicity))<span class="sc">+</span></span>
-<span id="cb72-21"><a href="more-complexe-example---quantitative-outcome.html#cb72-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> qualification, <span class="at">alpha =</span> localarea),<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb72-21"><a href="more-complexe-example---quantitative-outcome.html#cb72-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> Education, <span class="at">alpha =</span> localarea),<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb72-22"><a href="more-complexe-example---quantitative-outcome.html#cb72-22" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high, <span class="at">size =</span> age)) <span class="sc">+</span></span>
 <span id="cb72-23"><a href="more-complexe-example---quantitative-outcome.html#cb72-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Sratas&quot;</span>,</span>
 <span id="cb72-24"><a href="more-complexe-example---quantitative-outcome.html#cb72-24" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb72-25"><a href="more-complexe-example---quantitative-outcome.html#cb72-25" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape =</span> <span class="st">&quot;Qualification&quot;</span>,</span>
+<span id="cb72-25"><a href="more-complexe-example---quantitative-outcome.html#cb72-25" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape =</span> <span class="st">&quot;Education&quot;</span>,</span>
 <span id="cb72-26"><a href="more-complexe-example---quantitative-outcome.html#cb72-26" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha =</span> <span class="st">&quot;Life place&quot;</span>,</span>
 <span id="cb72-27"><a href="more-complexe-example---quantitative-outcome.html#cb72-27" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="st">&quot;Age class&quot;</span>,</span>
 <span id="cb72-28"><a href="more-complexe-example---quantitative-outcome.html#cb72-28" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;Sex category&quot;</span>,</span>
@@ -449,16 +448,16 @@ div.csl-indent {
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="more-complexe-example---quantitative-outcome.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models where we add each category one by one</span></span>
 <span id="cb74-2"><a href="more-complexe-example---quantitative-outcome.html#cb74-2" aria-hidden="true" tabindex="-1"></a>m_gender <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(AirPoll_PM10 <span class="sc">~</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata_2),</span>
 <span id="cb74-3"><a href="more-complexe-example---quantitative-outcome.html#cb74-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> mydata)</span>
-<span id="cb74-4"><a href="more-complexe-example---quantitative-outcome.html#cb74-4" aria-hidden="true" tabindex="-1"></a>m_ethnicity <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Loneliness <span class="sc">~</span> Ethnicity <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata_2),</span>
+<span id="cb74-4"><a href="more-complexe-example---quantitative-outcome.html#cb74-4" aria-hidden="true" tabindex="-1"></a>m_ethnicity <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(AirPoll_PM10 <span class="sc">~</span> Ethnicity <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata_2),</span>
 <span id="cb74-5"><a href="more-complexe-example---quantitative-outcome.html#cb74-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> mydata)</span>
 <span id="cb74-6"><a href="more-complexe-example---quantitative-outcome.html#cb74-6" aria-hidden="true" tabindex="-1"></a>m_age <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(AirPoll_PM10 <span class="sc">~</span> Age_class <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata_2),</span>
 <span id="cb74-7"><a href="more-complexe-example---quantitative-outcome.html#cb74-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> mydata)</span>
 <span id="cb74-8"><a href="more-complexe-example---quantitative-outcome.html#cb74-8" aria-hidden="true" tabindex="-1"></a>m_urban <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(AirPoll_PM10 <span class="sc">~</span> Urban <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata_2),</span>
 <span id="cb74-9"><a href="more-complexe-example---quantitative-outcome.html#cb74-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> mydata)</span>
-<span id="cb74-10"><a href="more-complexe-example---quantitative-outcome.html#cb74-10" aria-hidden="true" tabindex="-1"></a>m_qualif <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(AirPoll_PM10 <span class="sc">~</span> Qualification <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata_2),</span>
+<span id="cb74-10"><a href="more-complexe-example---quantitative-outcome.html#cb74-10" aria-hidden="true" tabindex="-1"></a>m_qualif <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(AirPoll_PM10 <span class="sc">~</span> Education <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata_2),</span>
 <span id="cb74-11"><a href="more-complexe-example---quantitative-outcome.html#cb74-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> mydata)</span>
 <span id="cb74-12"><a href="more-complexe-example---quantitative-outcome.html#cb74-12" aria-hidden="true" tabindex="-1"></a>m_full <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(AirPoll_PM10 <span class="sc">~</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">+</span> Sex <span class="sc">+</span></span>
-<span id="cb74-13"><a href="more-complexe-example---quantitative-outcome.html#cb74-13" aria-hidden="true" tabindex="-1"></a>                    Urban <span class="sc">+</span> Qualification <span class="sc">+</span>  (<span class="dv">1</span> <span class="sc">|</span> strata_2),</span>
+<span id="cb74-13"><a href="more-complexe-example---quantitative-outcome.html#cb74-13" aria-hidden="true" tabindex="-1"></a>                    Urban <span class="sc">+</span> Education <span class="sc">+</span>  (<span class="dv">1</span> <span class="sc">|</span> strata_2),</span>
 <span id="cb74-14"><a href="more-complexe-example---quantitative-outcome.html#cb74-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> mydata)</span>
 <span id="cb74-15"><a href="more-complexe-example---quantitative-outcome.html#cb74-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-16"><a href="more-complexe-example---quantitative-outcome.html#cb74-16" aria-hidden="true" tabindex="-1"></a>v_gender <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_gender)</span>
@@ -492,20 +491,20 @@ div.csl-indent {
 <span id="cb74-44"><a href="more-complexe-example---quantitative-outcome.html#cb74-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(</span>
 <span id="cb74-45"><a href="more-complexe-example---quantitative-outcome.html#cb74-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cbind</span>(</span>
 <span id="cb74-46"><a href="more-complexe-example---quantitative-outcome.html#cb74-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">parameters =</span> <span class="fu">c</span>(<span class="st">&quot;ICC/VPC&quot;</span>, <span class="st">&quot;% Sex category&quot;</span>, <span class="st">&quot;% Age/generation&quot;</span>,</span>
-<span id="cb74-47"><a href="more-complexe-example---quantitative-outcome.html#cb74-47" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;% Ethnicity&quot;</span>, <span class="st">&quot;% Life Place&quot;</span>, <span class="st">&quot;% Qualification&quot;</span>,</span>
+<span id="cb74-47"><a href="more-complexe-example---quantitative-outcome.html#cb74-47" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;% Ethnicity&quot;</span>, <span class="st">&quot;% Life Place&quot;</span>, <span class="st">&quot;% Education&quot;</span>,</span>
 <span id="cb74-48"><a href="more-complexe-example---quantitative-outcome.html#cb74-48" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;%Intersection&quot;</span>),</span>
 <span id="cb74-49"><a href="more-complexe-example---quantitative-outcome.html#cb74-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(ICC_intersect,prop_gender, prop_age, prop_ethnicity,</span>
 <span id="cb74-50"><a href="more-complexe-example---quantitative-outcome.html#cb74-50" aria-hidden="true" tabindex="-1"></a>               prop_urban,prop_qualif, prop_intersection )</span>
 <span id="cb74-51"><a href="more-complexe-example---quantitative-outcome.html#cb74-51" aria-hidden="true" tabindex="-1"></a>  )))</span></code></pre></div>
 <pre><code>##         parameters values
-## 1          ICC/VPC  17.56
-## 2   % Sex category   0.03
-## 3 % Age/generation   0.28
-## 4      % Ethnicity  99.72
-## 5     % Life Place  89.58
-## 6  % Qualification   0.25
-## 7    %Intersection   0.18</code></pre>
-<p>ICC is 17.56%, which is low. This differences is mainly explained by ethnicity (99.72%), life place (89.58%) and sex category (0.03%).</p>
+## 1          ICC/VPC  17.79
+## 2   % Sex category    0.1
+## 3 % Age/generation   0.25
+## 4      % Ethnicity   8.65
+## 5     % Life Place  89.12
+## 6      % Education   0.44
+## 7    %Intersection   0.62</code></pre>
+<p>ICC is 17.79%, which is low. This differences is mainly explained by ethnicity (8.65%), life place (89.12%) and sex category (0.1%).</p>
 
 </div>
 </div>

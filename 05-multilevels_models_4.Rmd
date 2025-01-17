@@ -1,6 +1,6 @@
 # More complexe example - quantitative outcome
 
-As a working example, we want to explore intersectional inequalities in loneliness by  intersectional strata (48 stratas).
+As a working example, we want to explore intersectional inequalities in air pollution exposition by  intersectional strata (48 stratas).
 
 ## Description
 
@@ -118,7 +118,7 @@ To calculate the (additive) contribution of each category to the total variance,
 # models where we add each category one by one
 m_gender <- glmmTMB(AirPoll_PM10 ~ Sex + (1 | strata_2),
                     data = mydata)
-m_ethnicity <- glmmTMB(Loneliness ~ Ethnicity + (1 | strata_2),
+m_ethnicity <- glmmTMB(AirPoll_PM10 ~ Ethnicity + (1 | strata_2),
                        data = mydata)
 m_age <- glmmTMB(AirPoll_PM10 ~ Age_class + (1 | strata_2),
                  data = mydata)

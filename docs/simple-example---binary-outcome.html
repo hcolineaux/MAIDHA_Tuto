@@ -225,22 +225,22 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="simple-example---binary-outcome" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">3</span> Simple example - binary outcome<a href="simple-example---binary-outcome.html#simple-example---binary-outcome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>As a working example, we want to explore intersectional inequalities in qualification (a “late” intersectional strata) by early intersectional strata (12 stratas).</p>
+<p>As a working example, we want to explore intersectional inequalities in life place (a “late” intersectional strata) by early intersectional strata (12 stratas).</p>
 <div id="description" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Description<a href="simple-example---binary-outcome.html#description" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We can start by describe the outcome by strata.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="simple-example---binary-outcome.html#cb14-1" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">|</span> Qualification,</span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="simple-example---binary-outcome.html#cb14-1" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">|</span> Urban,</span>
 <span id="cb14-2"><a href="simple-example---binary-outcome.html#cb14-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
 <span id="cb14-3"><a href="simple-example---binary-outcome.html#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
-<span id="cb14-4"><a href="simple-example---binary-outcome.html#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by qualification level&quot;</span>)</span></code></pre></div>
-<div class="Rtable1"><table class="Rtable1"><caption>Description by qualification level</caption>
+<span id="cb14-4"><a href="simple-example---binary-outcome.html#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by life place&quot;</span>)</span></code></pre></div>
+<div class="Rtable1"><table class="Rtable1"><caption>Description by life place</caption>
 
 <thead>
 <tr>
 <th class='rowlabel firstrow lastrow'></th>
 <th class='firstrow lastrow'><span class='stratlabel'>Total<br><span class='stratn'>(N=502461)</span></span></th>
-<th class='firstrow lastrow'><span class='stratlabel'>Med-High Qualif.<br><span class='stratn'>(N=356623)</span></span></th>
-<th class='firstrow lastrow'><span class='stratlabel'>Low Qualif.<br><span class='stratn'>(N=145838)</span></span></th>
+<th class='firstrow lastrow'><span class='stratlabel'>Rural<br><span class='stratn'>(N=68955)</span></span></th>
+<th class='firstrow lastrow'><span class='stratlabel'>Urban<br><span class='stratn'>(N=433506)</span></span></th>
 </tr>
 </thead>
 <tbody>
@@ -253,14 +253,14 @@ div.csl-indent {
 <tr>
 <td class='rowlabel'>Women</td>
 <td>273354 (54.4%)</td>
-<td>187727 (52.6%)</td>
-<td>85627 (58.7%)</td>
+<td>37892 (55.0%)</td>
+<td>235462 (54.3%)</td>
 </tr>
 <tr>
 <td class='rowlabel lastrow'>Men</td>
 <td class='lastrow'>229107 (45.6%)</td>
-<td class='lastrow'>168896 (47.4%)</td>
-<td class='lastrow'>60211 (41.3%)</td>
+<td class='lastrow'>31063 (45.0%)</td>
+<td class='lastrow'>198044 (45.7%)</td>
 </tr>
 <tr>
 <td class='rowlabel firstrow'>Age_class</td>
@@ -271,20 +271,20 @@ div.csl-indent {
 <tr>
 <td class='rowlabel'>-50</td>
 <td>132145 (26.3%)</td>
-<td>87439 (24.5%)</td>
-<td>44706 (30.7%)</td>
+<td>15448 (22.4%)</td>
+<td>116697 (26.9%)</td>
 </tr>
 <tr>
 <td class='rowlabel'>51-60</td>
 <td>177222 (35.3%)</td>
-<td>127965 (35.9%)</td>
-<td>49257 (33.8%)</td>
+<td>24441 (35.4%)</td>
+<td>152781 (35.2%)</td>
 </tr>
 <tr>
 <td class='rowlabel lastrow'>61+</td>
 <td class='lastrow'>193094 (38.4%)</td>
-<td class='lastrow'>141219 (39.6%)</td>
-<td class='lastrow'>51875 (35.6%)</td>
+<td class='lastrow'>29066 (42.2%)</td>
+<td class='lastrow'>164028 (37.8%)</td>
 </tr>
 <tr>
 <td class='rowlabel firstrow'>Ethnicity</td>
@@ -295,14 +295,14 @@ div.csl-indent {
 <tr>
 <td class='rowlabel'>Non White</td>
 <td>27037 (5.4%)</td>
-<td>20621 (5.8%)</td>
-<td>6416 (4.4%)</td>
+<td>795 (1.2%)</td>
+<td>26242 (6.1%)</td>
 </tr>
 <tr>
 <td class='rowlabel lastrow'>White</td>
 <td class='lastrow'>475424 (94.6%)</td>
-<td class='lastrow'>336002 (94.2%)</td>
-<td class='lastrow'>139422 (95.6%)</td>
+<td class='lastrow'>68160 (98.8%)</td>
+<td class='lastrow'>407264 (93.9%)</td>
 </tr>
 </tbody>
 </table>
@@ -313,13 +313,13 @@ div.csl-indent {
 <span id="cb15-3"><a href="simple-example---binary-outcome.html#cb15-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span> </span>
 <span id="cb15-4"><a href="simple-example---binary-outcome.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-5"><a href="simple-example---binary-outcome.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tot =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb15-6"><a href="simple-example---binary-outcome.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata,Qualification) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="simple-example---binary-outcome.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata,Urban) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-7"><a href="simple-example---binary-outcome.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">n</span>()<span class="sc">/</span>tot) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-8"><a href="simple-example---binary-outcome.html#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Qualification <span class="sc">==</span> <span class="st">&quot;Low Qualif.&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-8"><a href="simple-example---binary-outcome.html#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Urban <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-9"><a href="simple-example---binary-outcome.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(strata,value,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>),</span>
 <span id="cb15-10"><a href="simple-example---binary-outcome.html#cb15-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span>value)) <span class="sc">+</span></span>
 <span id="cb15-11"><a href="simple-example---binary-outcome.html#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
-<span id="cb15-12"><a href="simple-example---binary-outcome.html#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Stratas&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Low Qualification&quot;</span>,</span>
+<span id="cb15-12"><a href="simple-example---binary-outcome.html#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Stratas&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Living in an Urban area&quot;</span>,</span>
 <span id="cb15-13"><a href="simple-example---binary-outcome.html#cb15-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">&quot;Observed percentage by stratas&quot;</span>) <span class="sc">+</span></span>
 <span id="cb15-14"><a href="simple-example---binary-outcome.html#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,  <span class="at">vjust=</span><span class="dv">1</span>,  <span class="at">hjust=</span><span class="dv">1</span>))</span>
 <span id="cb15-15"><a href="simple-example---binary-outcome.html#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
@@ -331,7 +331,7 @@ div.csl-indent {
 <h2><span class="header-section-number">3.2</span> The null model (only strata)<a href="simple-example---binary-outcome.html#the-null-model-only-strata" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The null model allows us to estimate the IntraClass correlation (ICC), also known as the Variance Partition Coefficient (VPC), that is the part of the outcome variance that can be explained by the strata.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="simple-example---binary-outcome.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multilevel model</span></span>
-<span id="cb17-2"><a href="simple-example---binary-outcome.html#cb17-2" aria-hidden="true" tabindex="-1"></a>m_null <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Qualification <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata),</span>
+<span id="cb17-2"><a href="simple-example---binary-outcome.html#cb17-2" aria-hidden="true" tabindex="-1"></a>m_null <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata),</span>
 <span id="cb17-3"><a href="simple-example---binary-outcome.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> mydata,</span>
 <span id="cb17-4"><a href="simple-example---binary-outcome.html#cb17-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> binomial)</span>
 <span id="cb17-5"><a href="simple-example---binary-outcome.html#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -347,33 +347,33 @@ div.csl-indent {
 <p>Outputs of the models:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="simple-example---binary-outcome.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_null)</span></code></pre></div>
 <pre><code>##  Family: binomial  ( logit )
-## Formula:          Qualification ~ 1 + (1 | strata)
+## Formula:          Urban ~ 1 + (1 | strata)
 ## Data: mydata
 ## 
 ##       AIC       BIC    logLik  deviance  df.resid 
-##  600465.6  600487.8 -300230.8  600461.6    502459 
+##  397586.0  397608.3 -198791.0  397582.0    502459 
 ## 
 ## Random effects:
 ## 
 ## Conditional model:
 ##  Groups Name        Variance Std.Dev.
-##  strata (Intercept) 0.06779  0.2604  
+##  strata (Intercept) 0.7121   0.8439  
 ## Number of obs: 502461, groups:  strata, 12
 ## 
 ## Conditional model:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -1.03793    0.07558  -13.73   &lt;2e-16 ***
+## (Intercept)   2.6448     0.2443   10.82   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="simple-example---binary-outcome.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the variances:</span></span>
 <span id="cb23-2"><a href="simple-example---binary-outcome.html#cb23-2" aria-hidden="true" tabindex="-1"></a>v_null <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_null)</span>
 <span id="cb23-3"><a href="simple-example---binary-outcome.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># between stratas variance:</span></span>
 <span id="cb23-4"><a href="simple-example---binary-outcome.html#cb23-4" aria-hidden="true" tabindex="-1"></a>v_null<span class="sc">$</span>var.random</span></code></pre></div>
-<pre><code>## [1] 0.06778898</code></pre>
+<pre><code>## [1] 0.7121063</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="simple-example---binary-outcome.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># intraclass correlation </span></span>
 <span id="cb25-2"><a href="simple-example---binary-outcome.html#cb25-2" aria-hidden="true" tabindex="-1"></a>ICC_intersect <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">icc</span>(m_null)<span class="sc">$</span>ICC_unadjusted<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
 <span id="cb25-3"><a href="simple-example---binary-outcome.html#cb25-3" aria-hidden="true" tabindex="-1"></a>ICC_intersect</span></code></pre></div>
-<pre><code>## [1] 2.02</code></pre>
+<pre><code>## [1] 17.79</code></pre>
 <p>Plot of the predicted values by strata:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="simple-example---binary-outcome.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
 <span id="cb27-2"><a href="simple-example---binary-outcome.html#cb27-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict_response</span>(</span>
@@ -400,7 +400,7 @@ div.csl-indent {
 <span id="cb27-23"><a href="simple-example---binary-outcome.html#cb27-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="st">&quot;Sex Category&quot;</span>,</span>
 <span id="cb27-24"><a href="simple-example---binary-outcome.html#cb27-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linetype =</span> <span class="st">&quot;Ethnicity&quot;</span>,</span>
 <span id="cb27-25"><a href="simple-example---binary-outcome.html#cb27-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">size =</span> <span class="st">&quot;Age&quot;</span>,</span>
-<span id="cb27-26"><a href="simple-example---binary-outcome.html#cb27-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Predicted values for having a low qualification&quot;</span>))<span class="sc">+</span></span>
+<span id="cb27-26"><a href="simple-example---binary-outcome.html#cb27-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Predicted values for having a low Urban&quot;</span>))<span class="sc">+</span></span>
 <span id="cb27-27"><a href="simple-example---binary-outcome.html#cb27-27" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
 <span id="cb27-28"><a href="simple-example---binary-outcome.html#cb27-28" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>)))<span class="sc">+</span> </span>
 <span id="cb27-29"><a href="simple-example---binary-outcome.html#cb27-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_size_discrete</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>))</span>
@@ -413,10 +413,10 @@ div.csl-indent {
 <h2><span class="header-section-number">3.3</span> The variance change<a href="simple-example---binary-outcome.html#the-variance-change" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To calculate the (additive) contribution of each category to the total variance, we can estimate the variance change when adjusting for this category. The Proportional Variance Change (PVC) when adjusting for all categories is the portion of ICC/VPC explained by additive effect. Therefore 100% - PVC is the part explained by an intersectional effect .</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="simple-example---binary-outcome.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models where we add each category one by one</span></span>
-<span id="cb29-2"><a href="simple-example---binary-outcome.html#cb29-2" aria-hidden="true" tabindex="-1"></a>m_gender <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Qualification <span class="sc">~</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
-<span id="cb29-3"><a href="simple-example---binary-outcome.html#cb29-3" aria-hidden="true" tabindex="-1"></a>m_ethnicity <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Qualification <span class="sc">~</span> Ethnicity <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
-<span id="cb29-4"><a href="simple-example---binary-outcome.html#cb29-4" aria-hidden="true" tabindex="-1"></a>m_age <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Qualification <span class="sc">~</span> Age_class <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
-<span id="cb29-5"><a href="simple-example---binary-outcome.html#cb29-5" aria-hidden="true" tabindex="-1"></a>m_full <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Qualification <span class="sc">~</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">+</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
+<span id="cb29-2"><a href="simple-example---binary-outcome.html#cb29-2" aria-hidden="true" tabindex="-1"></a>m_gender <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
+<span id="cb29-3"><a href="simple-example---binary-outcome.html#cb29-3" aria-hidden="true" tabindex="-1"></a>m_ethnicity <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Ethnicity <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
+<span id="cb29-4"><a href="simple-example---binary-outcome.html#cb29-4" aria-hidden="true" tabindex="-1"></a>m_age <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Age_class <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
+<span id="cb29-5"><a href="simple-example---binary-outcome.html#cb29-5" aria-hidden="true" tabindex="-1"></a>m_full <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">+</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
 <span id="cb29-6"><a href="simple-example---binary-outcome.html#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-7"><a href="simple-example---binary-outcome.html#cb29-7" aria-hidden="true" tabindex="-1"></a>v_gender <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_gender)</span>
 <span id="cb29-8"><a href="simple-example---binary-outcome.html#cb29-8" aria-hidden="true" tabindex="-1"></a>v_ethnicity <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_ethnicity)</span>
@@ -444,12 +444,12 @@ div.csl-indent {
 <span id="cb29-30"><a href="simple-example---binary-outcome.html#cb29-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(ICC_intersect,prop_gender, prop_age, prop_ethnicity,prop_intersection )</span>
 <span id="cb29-31"><a href="simple-example---binary-outcome.html#cb29-31" aria-hidden="true" tabindex="-1"></a>  )))</span></code></pre></div>
 <pre><code>##         parameters values
-## 1          ICC/VPC   2.02
-## 2   % Sex category   22.9
-## 3 % Age/generation  19.84
-## 4      % Ethnicity  42.77
-## 5    %Intersection  14.29</code></pre>
-<p>ICC is 2.02%, which is low. This differences is mainly explained by ethnicity (42.77%), age (19.84%) and an intersectional effect (14.29%).</p>
+## 1          ICC/VPC  17.79
+## 2   % Sex category   0.06
+## 3 % Age/generation   1.12
+## 4      % Ethnicity  98.74
+## 5    %Intersection   0.03</code></pre>
+<p>ICC is 17.79%, which is low. This differences is mainly explained by ethnicity (98.74%), sex category (0.06%) and age (1.12%).</p>
 
 </div>
 </div>

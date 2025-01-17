@@ -228,20 +228,18 @@ div.csl-indent {
 <p>As a working example, we want to explore intersectional inequalities in educaion length (a “late” intersectional strata) by early intersectional strata (12 stratas).</p>
 <div id="description-1" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Description<a href="simple-example---continous-outcome.html#description-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="simple-example---continous-outcome.html#cb31-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>AgeEducEnd_class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(mydata<span class="sc">$</span>AgeEducEnd <span class="sc">&lt;</span> <span class="fu">mean</span>(mydata<span class="sc">$</span>AgeEducEnd),</span>
-<span id="cb31-2"><a href="simple-example---continous-outcome.html#cb31-2" aria-hidden="true" tabindex="-1"></a>                                                                     <span class="st">&quot;Below mean&quot;</span>, <span class="st">&quot;Above mean&quot;</span>))</span>
-<span id="cb31-3"><a href="simple-example---continous-outcome.html#cb31-3" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">|</span> AgeEducEnd_class,</span>
-<span id="cb31-4"><a href="simple-example---continous-outcome.html#cb31-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
-<span id="cb31-5"><a href="simple-example---continous-outcome.html#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
-<span id="cb31-6"><a href="simple-example---continous-outcome.html#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by age of education end&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="simple-example---continous-outcome.html#cb31-1" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">|</span> Education,</span>
+<span id="cb31-2"><a href="simple-example---continous-outcome.html#cb31-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
+<span id="cb31-3"><a href="simple-example---continous-outcome.html#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
+<span id="cb31-4"><a href="simple-example---continous-outcome.html#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by age of education end&quot;</span>)</span></code></pre></div>
 <div class="Rtable1"><table class="Rtable1"><caption>Description by age of education end</caption>
 
 <thead>
 <tr>
 <th class='rowlabel firstrow lastrow'></th>
 <th class='firstrow lastrow'><span class='stratlabel'>Total<br><span class='stratn'>(N=502461)</span></span></th>
-<th class='firstrow lastrow'><span class='stratlabel'>Above mean<br><span class='stratn'>(N=199714)</span></span></th>
-<th class='firstrow lastrow'><span class='stratlabel'>Below mean<br><span class='stratn'>(N=302747)</span></span></th>
+<th class='firstrow lastrow'><span class='stratlabel'>Short Educ.<br><span class='stratn'>(N=284626)</span></span></th>
+<th class='firstrow lastrow'><span class='stratlabel'>Long Educ.<br><span class='stratn'>(N=217835)</span></span></th>
 </tr>
 </thead>
 <tbody>
@@ -254,14 +252,14 @@ div.csl-indent {
 <tr>
 <td class='rowlabel'>Women</td>
 <td>273354 (54.4%)</td>
-<td>110322 (55.2%)</td>
-<td>163032 (53.9%)</td>
+<td>153360 (53.9%)</td>
+<td>119994 (55.1%)</td>
 </tr>
 <tr>
 <td class='rowlabel lastrow'>Men</td>
 <td class='lastrow'>229107 (45.6%)</td>
-<td class='lastrow'>89392 (44.8%)</td>
-<td class='lastrow'>139715 (46.1%)</td>
+<td class='lastrow'>131266 (46.1%)</td>
+<td class='lastrow'>97841 (44.9%)</td>
 </tr>
 <tr>
 <td class='rowlabel firstrow'>Age_class</td>
@@ -272,20 +270,20 @@ div.csl-indent {
 <tr>
 <td class='rowlabel'>-50</td>
 <td>132145 (26.3%)</td>
-<td>62549 (31.3%)</td>
-<td>69596 (23.0%)</td>
+<td>63840 (22.4%)</td>
+<td>68305 (31.4%)</td>
 </tr>
 <tr>
 <td class='rowlabel'>51-60</td>
 <td>177222 (35.3%)</td>
-<td>73933 (37.0%)</td>
-<td>103289 (34.1%)</td>
+<td>96423 (33.9%)</td>
+<td>80799 (37.1%)</td>
 </tr>
 <tr>
 <td class='rowlabel lastrow'>61+</td>
 <td class='lastrow'>193094 (38.4%)</td>
-<td class='lastrow'>63232 (31.7%)</td>
-<td class='lastrow'>129862 (42.9%)</td>
+<td class='lastrow'>124363 (43.7%)</td>
+<td class='lastrow'>68731 (31.6%)</td>
 </tr>
 <tr>
 <td class='rowlabel firstrow'>Ethnicity</td>
@@ -296,14 +294,14 @@ div.csl-indent {
 <tr>
 <td class='rowlabel'>Non White</td>
 <td>27037 (5.4%)</td>
-<td>14679 (7.4%)</td>
-<td>12358 (4.1%)</td>
+<td>10917 (3.8%)</td>
+<td>16120 (7.4%)</td>
 </tr>
 <tr>
 <td class='rowlabel lastrow'>White</td>
 <td class='lastrow'>475424 (94.6%)</td>
-<td class='lastrow'>185035 (92.7%)</td>
-<td class='lastrow'>290389 (95.9%)</td>
+<td class='lastrow'>273709 (96.2%)</td>
+<td class='lastrow'>201715 (92.6%)</td>
 </tr>
 </tbody>
 </table>
