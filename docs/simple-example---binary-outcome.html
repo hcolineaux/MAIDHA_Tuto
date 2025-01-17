@@ -55,6 +55,8 @@ intersectional phenomenon in biology and health.</p>" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/table1-1.0/table1_defaults.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -229,101 +231,171 @@ div.csl-indent {
 <div id="description" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Description<a href="simple-example---binary-outcome.html#description" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We can start by describe the outcome by strata.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="simple-example---binary-outcome.html#cb14-1" aria-hidden="true" tabindex="-1"></a>table1<span class="sc">::</span><span class="fu">table1</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">|</span> Urban,</span>
-<span id="cb14-2"><a href="simple-example---binary-outcome.html#cb14-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>mydata,</span>
-<span id="cb14-3"><a href="simple-example---binary-outcome.html#cb14-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">row_wise =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb14-4"><a href="simple-example---binary-outcome.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">overall=</span><span class="fu">c</span>(<span class="at">left=</span><span class="st">&quot;Total&quot;</span>),</span>
-<span id="cb14-5"><a href="simple-example---binary-outcome.html#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Description by life place&quot;</span>)</span></code></pre></div>
-<div class="Rtable1"><table class="Rtable1"><caption>Description by life place</caption>
-
+<table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th class='rowlabel firstrow lastrow'></th>
-<th class='firstrow lastrow'><span class='stratlabel'>Total<br><span class='stratn'>(N=502461)</span></span></th>
-<th class='firstrow lastrow'><span class='stratlabel'>Rural<br><span class='stratn'>(N=68955)</span></span></th>
-<th class='firstrow lastrow'><span class='stratlabel'>Urban<br><span class='stratn'>(N=433506)</span></span></th>
+<th style="text-align:left;">
+label
+</th>
+<th style="text-align:right;">
+Total N
+</th>
+<th style="text-align:left;">
+levels
+</th>
+<th style="text-align:right;">
+Rural
+</th>
+<th style="text-align:right;">
+Urban
+</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class='rowlabel firstrow'>Sex</td>
-<td class='firstrow'></td>
-<td class='firstrow'></td>
-<td class='firstrow'></td>
+<td style="text-align:left;">
+Total N (%)
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+68955 (13.72)
+</td>
+<td style="text-align:right;">
+433506 (86.28)
+</td>
 </tr>
 <tr>
-<td class='rowlabel'>Women</td>
-<td>273354 (54.4%)</td>
-<td>37892 (55.0%)</td>
-<td>235462 (54.3%)</td>
+<td style="text-align:left;">
+Sex
+</td>
+<td style="text-align:right;">
+502461 (100.0)
+</td>
+<td style="text-align:left;">
+Women
+</td>
+<td style="text-align:right;">
+37892 (13.86)
+</td>
+<td style="text-align:right;">
+235462 (86.14)
+</td>
 </tr>
 <tr>
-<td class='rowlabel lastrow'>Men</td>
-<td class='lastrow'>229107 (45.6%)</td>
-<td class='lastrow'>31063 (45.0%)</td>
-<td class='lastrow'>198044 (45.7%)</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+Men
+</td>
+<td style="text-align:right;">
+31063 (13.56)
+</td>
+<td style="text-align:right;">
+198044 (86.44)
+</td>
 </tr>
 <tr>
-<td class='rowlabel firstrow'>Age_class</td>
-<td class='firstrow'></td>
-<td class='firstrow'></td>
-<td class='firstrow'></td>
+<td style="text-align:left;">
+Age_class
+</td>
+<td style="text-align:right;">
+502461 (100.0)
+</td>
+<td style="text-align:left;">
+-50
+</td>
+<td style="text-align:right;">
+15448 (11.69)
+</td>
+<td style="text-align:right;">
+116697 (88.31)
+</td>
 </tr>
 <tr>
-<td class='rowlabel'>-50</td>
-<td>132145 (26.3%)</td>
-<td>15448 (22.4%)</td>
-<td>116697 (26.9%)</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+51-60
+</td>
+<td style="text-align:right;">
+24441 (13.79)
+</td>
+<td style="text-align:right;">
+152781 (86.21)
+</td>
 </tr>
 <tr>
-<td class='rowlabel'>51-60</td>
-<td>177222 (35.3%)</td>
-<td>24441 (35.4%)</td>
-<td>152781 (35.2%)</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+61+
+</td>
+<td style="text-align:right;">
+29066 (15.05)
+</td>
+<td style="text-align:right;">
+164028 (84.95)
+</td>
 </tr>
 <tr>
-<td class='rowlabel lastrow'>61+</td>
-<td class='lastrow'>193094 (38.4%)</td>
-<td class='lastrow'>29066 (42.2%)</td>
-<td class='lastrow'>164028 (37.8%)</td>
+<td style="text-align:left;">
+Ethnicity
+</td>
+<td style="text-align:right;">
+502461 (100.0)
+</td>
+<td style="text-align:left;">
+Non White
+</td>
+<td style="text-align:right;">
+795 (2.94)
+</td>
+<td style="text-align:right;">
+26242 (97.06)
+</td>
 </tr>
 <tr>
-<td class='rowlabel firstrow'>Ethnicity</td>
-<td class='firstrow'></td>
-<td class='firstrow'></td>
-<td class='firstrow'></td>
-</tr>
-<tr>
-<td class='rowlabel'>Non White</td>
-<td>27037 (5.4%)</td>
-<td>795 (1.2%)</td>
-<td>26242 (6.1%)</td>
-</tr>
-<tr>
-<td class='rowlabel lastrow'>White</td>
-<td class='lastrow'>475424 (94.6%)</td>
-<td class='lastrow'>68160 (98.8%)</td>
-<td class='lastrow'>407264 (93.9%)</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+White
+</td>
+<td style="text-align:right;">
+68160 (14.34)
+</td>
+<td style="text-align:right;">
+407264 (85.66)
+</td>
 </tr>
 </tbody>
 </table>
-</div>
 <p>We can plot the observed probability.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="simple-example---binary-outcome.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/plot_12_quali.jpeg&quot;</span>,</span>
-<span id="cb15-2"><a href="simple-example---binary-outcome.html#cb15-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
-<span id="cb15-3"><a href="simple-example---binary-outcome.html#cb15-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span> </span>
-<span id="cb15-4"><a href="simple-example---binary-outcome.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-5"><a href="simple-example---binary-outcome.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tot =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb15-6"><a href="simple-example---binary-outcome.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata,Urban) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-7"><a href="simple-example---binary-outcome.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">n</span>()<span class="sc">/</span>tot) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-8"><a href="simple-example---binary-outcome.html#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Urban <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-9"><a href="simple-example---binary-outcome.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(strata,value,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>),</span>
-<span id="cb15-10"><a href="simple-example---binary-outcome.html#cb15-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span>value)) <span class="sc">+</span></span>
-<span id="cb15-11"><a href="simple-example---binary-outcome.html#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
-<span id="cb15-12"><a href="simple-example---binary-outcome.html#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Stratas&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Living in an Urban area&quot;</span>,</span>
-<span id="cb15-13"><a href="simple-example---binary-outcome.html#cb15-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">&quot;Observed percentage by stratas&quot;</span>) <span class="sc">+</span></span>
-<span id="cb15-14"><a href="simple-example---binary-outcome.html#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,  <span class="at">vjust=</span><span class="dv">1</span>,  <span class="at">hjust=</span><span class="dv">1</span>))</span>
-<span id="cb15-15"><a href="simple-example---binary-outcome.html#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="simple-example---binary-outcome.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/plot_12_quali.jpeg&quot;</span>,</span>
+<span id="cb14-2"><a href="simple-example---binary-outcome.html#cb14-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
+<span id="cb14-3"><a href="simple-example---binary-outcome.html#cb14-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="simple-example---binary-outcome.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="simple-example---binary-outcome.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tot =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="simple-example---binary-outcome.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata,Urban) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-7"><a href="simple-example---binary-outcome.html#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">n</span>()<span class="sc">/</span>tot) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-8"><a href="simple-example---binary-outcome.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Urban <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-9"><a href="simple-example---binary-outcome.html#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(strata,value,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>),</span>
+<span id="cb14-10"><a href="simple-example---binary-outcome.html#cb14-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span>value)) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="simple-example---binary-outcome.html#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
+<span id="cb14-12"><a href="simple-example---binary-outcome.html#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Stratas&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Living in an Urban area&quot;</span>,</span>
+<span id="cb14-13"><a href="simple-example---binary-outcome.html#cb14-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">&quot;Observed percentage by stratas&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-14"><a href="simple-example---binary-outcome.html#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,  <span class="at">vjust=</span><span class="dv">1</span>,  <span class="at">hjust=</span><span class="dv">1</span>))</span>
+<span id="cb14-15"><a href="simple-example---binary-outcome.html#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 <pre><code>## png 
 ##   2</code></pre>
 <p><img src="img/plot_12_quali.jpeg" /></p>
@@ -331,22 +403,22 @@ div.csl-indent {
 <div id="the-null-model-only-strata" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> The null model (only strata)<a href="simple-example---binary-outcome.html#the-null-model-only-strata" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The null model allows us to estimate the IntraClass correlation (ICC), also known as the Variance Partition Coefficient (VPC), that is the part of the outcome variance that can be explained by the strata.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="simple-example---binary-outcome.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multilevel model</span></span>
-<span id="cb17-2"><a href="simple-example---binary-outcome.html#cb17-2" aria-hidden="true" tabindex="-1"></a>m_null <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata),</span>
-<span id="cb17-3"><a href="simple-example---binary-outcome.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> mydata,</span>
-<span id="cb17-4"><a href="simple-example---binary-outcome.html#cb17-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> binomial)</span>
-<span id="cb17-5"><a href="simple-example---binary-outcome.html#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="simple-example---binary-outcome.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># intercept varies according to the stratum</span></span>
-<span id="cb17-7"><a href="simple-example---binary-outcome.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/models_1.jpeg&quot;</span>,</span>
-<span id="cb17-8"><a href="simple-example---binary-outcome.html#cb17-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
-<span id="cb17-9"><a href="simple-example---binary-outcome.html#cb17-9" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(m_null, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="simple-example---binary-outcome.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multilevel model</span></span>
+<span id="cb16-2"><a href="simple-example---binary-outcome.html#cb16-2" aria-hidden="true" tabindex="-1"></a>m_null <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata),</span>
+<span id="cb16-3"><a href="simple-example---binary-outcome.html#cb16-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> mydata,</span>
+<span id="cb16-4"><a href="simple-example---binary-outcome.html#cb16-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> binomial)</span>
+<span id="cb16-5"><a href="simple-example---binary-outcome.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="simple-example---binary-outcome.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># intercept varies according to the stratum</span></span>
+<span id="cb16-7"><a href="simple-example---binary-outcome.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/models_1.jpeg&quot;</span>,</span>
+<span id="cb16-8"><a href="simple-example---binary-outcome.html#cb16-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
+<span id="cb16-9"><a href="simple-example---binary-outcome.html#cb16-9" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(m_null, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)</span></code></pre></div>
 <pre><code>## $strata</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="simple-example---binary-outcome.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="simple-example---binary-outcome.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 <pre><code>## png 
 ##   2</code></pre>
 <p><img src="img/models_1.jpeg" /></p>
 <p>Outputs of the models:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="simple-example---binary-outcome.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_null)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="simple-example---binary-outcome.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_null)</span></code></pre></div>
 <pre><code>##  Family: binomial  ( logit )
 ## Formula:          Urban ~ 1 + (1 | strata)
 ## Data: mydata
@@ -366,46 +438,46 @@ div.csl-indent {
 ## (Intercept)   2.6448     0.2443   10.82   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="simple-example---binary-outcome.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the variances:</span></span>
-<span id="cb23-2"><a href="simple-example---binary-outcome.html#cb23-2" aria-hidden="true" tabindex="-1"></a>v_null <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_null)</span>
-<span id="cb23-3"><a href="simple-example---binary-outcome.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># between stratas variance:</span></span>
-<span id="cb23-4"><a href="simple-example---binary-outcome.html#cb23-4" aria-hidden="true" tabindex="-1"></a>v_null<span class="sc">$</span>var.random</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="simple-example---binary-outcome.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the variances:</span></span>
+<span id="cb22-2"><a href="simple-example---binary-outcome.html#cb22-2" aria-hidden="true" tabindex="-1"></a>v_null <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_null)</span>
+<span id="cb22-3"><a href="simple-example---binary-outcome.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># between stratas variance:</span></span>
+<span id="cb22-4"><a href="simple-example---binary-outcome.html#cb22-4" aria-hidden="true" tabindex="-1"></a>v_null<span class="sc">$</span>var.random</span></code></pre></div>
 <pre><code>## [1] 0.7121063</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="simple-example---binary-outcome.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># intraclass correlation </span></span>
-<span id="cb25-2"><a href="simple-example---binary-outcome.html#cb25-2" aria-hidden="true" tabindex="-1"></a>ICC_intersect <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">icc</span>(m_null)<span class="sc">$</span>ICC_unadjusted<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
-<span id="cb25-3"><a href="simple-example---binary-outcome.html#cb25-3" aria-hidden="true" tabindex="-1"></a>ICC_intersect</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="simple-example---binary-outcome.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># intraclass correlation </span></span>
+<span id="cb24-2"><a href="simple-example---binary-outcome.html#cb24-2" aria-hidden="true" tabindex="-1"></a>ICC_intersect <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">icc</span>(m_null)<span class="sc">$</span>ICC_unadjusted<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb24-3"><a href="simple-example---binary-outcome.html#cb24-3" aria-hidden="true" tabindex="-1"></a>ICC_intersect</span></code></pre></div>
 <pre><code>## [1] 17.79</code></pre>
 <p>Plot of the predicted values by strata:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="simple-example---binary-outcome.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
-<span id="cb27-2"><a href="simple-example---binary-outcome.html#cb27-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict_response</span>(</span>
-<span id="cb27-3"><a href="simple-example---binary-outcome.html#cb27-3" aria-hidden="true" tabindex="-1"></a>      m_null,</span>
-<span id="cb27-4"><a href="simple-example---binary-outcome.html#cb27-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">&quot;strata&quot;</span>),</span>
-<span id="cb27-5"><a href="simple-example---binary-outcome.html#cb27-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">&quot;random&quot;</span>) </span>
-<span id="cb27-6"><a href="simple-example---binary-outcome.html#cb27-6" aria-hidden="true" tabindex="-1"></a>    predictions <span class="ot">&lt;-</span> predictions <span class="sc">%&gt;%</span> </span>
-<span id="cb27-7"><a href="simple-example---binary-outcome.html#cb27-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">arrange</span>(predicted) </span>
-<span id="cb27-8"><a href="simple-example---binary-outcome.html#cb27-8" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>rown <span class="ot">=</span> <span class="fu">rownames</span>(predictions)</span>
-<span id="cb27-9"><a href="simple-example---binary-outcome.html#cb27-9" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>x_lab <span class="ot">&lt;-</span> <span class="fu">paste0</span>(predictions<span class="sc">$</span>rown,<span class="st">&quot;.&quot;</span>,predictions<span class="sc">$</span>x)</span>
-<span id="cb27-10"><a href="simple-example---binary-outcome.html#cb27-10" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Men&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Men&quot;</span>, <span class="st">&quot;Women&quot;</span>))</span>
-<span id="cb27-11"><a href="simple-example---binary-outcome.html#cb27-11" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>ethnicity <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Non White&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Non white&quot;</span>, <span class="st">&quot;White&quot;</span>))</span>
-<span id="cb27-12"><a href="simple-example---binary-outcome.html#cb27-12" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;61+&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;61+&quot;</span>,</span>
-<span id="cb27-13"><a href="simple-example---binary-outcome.html#cb27-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;-50&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;-50&quot;</span>,<span class="st">&quot;51-60&quot;</span>)))</span>
-<span id="cb27-14"><a href="simple-example---binary-outcome.html#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">jpeg</span>(<span class="st">&quot;img/plot.jpeg&quot;</span>,</span>
-<span id="cb27-15"><a href="simple-example---binary-outcome.html#cb27-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
-<span id="cb27-16"><a href="simple-example---binary-outcome.html#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(predictions <span class="sc">%&gt;%</span> </span>
-<span id="cb27-17"><a href="simple-example---binary-outcome.html#cb27-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>predicted, <span class="at">y=</span><span class="fu">fct_reorder</span>(x,predicted,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>),</span>
-<span id="cb27-18"><a href="simple-example---binary-outcome.html#cb27-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> sex, <span class="at">linetype =</span> ethnicity))<span class="sc">+</span></span>
-<span id="cb27-19"><a href="simple-example---binary-outcome.html#cb27-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb27-20"><a href="simple-example---binary-outcome.html#cb27-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high, <span class="at">size =</span> age))<span class="sc">+</span></span>
-<span id="cb27-21"><a href="simple-example---binary-outcome.html#cb27-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">labs</span>( <span class="at">y =</span> <span class="st">&quot;Sratas&quot;</span>, </span>
-<span id="cb27-22"><a href="simple-example---binary-outcome.html#cb27-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb27-23"><a href="simple-example---binary-outcome.html#cb27-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="st">&quot;Sex Category&quot;</span>,</span>
-<span id="cb27-24"><a href="simple-example---binary-outcome.html#cb27-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linetype =</span> <span class="st">&quot;Ethnicity&quot;</span>,</span>
-<span id="cb27-25"><a href="simple-example---binary-outcome.html#cb27-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">size =</span> <span class="st">&quot;Age&quot;</span>,</span>
-<span id="cb27-26"><a href="simple-example---binary-outcome.html#cb27-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Predicted values for living in a urban area&quot;</span>))<span class="sc">+</span></span>
-<span id="cb27-27"><a href="simple-example---binary-outcome.html#cb27-27" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb27-28"><a href="simple-example---binary-outcome.html#cb27-28" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>)))<span class="sc">+</span> </span>
-<span id="cb27-29"><a href="simple-example---binary-outcome.html#cb27-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_size_discrete</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>))</span>
-<span id="cb27-30"><a href="simple-example---binary-outcome.html#cb27-30" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="simple-example---binary-outcome.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb26-2"><a href="simple-example---binary-outcome.html#cb26-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict_response</span>(</span>
+<span id="cb26-3"><a href="simple-example---binary-outcome.html#cb26-3" aria-hidden="true" tabindex="-1"></a>      m_null,</span>
+<span id="cb26-4"><a href="simple-example---binary-outcome.html#cb26-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">&quot;strata&quot;</span>),</span>
+<span id="cb26-5"><a href="simple-example---binary-outcome.html#cb26-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">&quot;random&quot;</span>) </span>
+<span id="cb26-6"><a href="simple-example---binary-outcome.html#cb26-6" aria-hidden="true" tabindex="-1"></a>    predictions <span class="ot">&lt;-</span> predictions <span class="sc">%&gt;%</span> </span>
+<span id="cb26-7"><a href="simple-example---binary-outcome.html#cb26-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">arrange</span>(predicted) </span>
+<span id="cb26-8"><a href="simple-example---binary-outcome.html#cb26-8" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>rown <span class="ot">=</span> <span class="fu">rownames</span>(predictions)</span>
+<span id="cb26-9"><a href="simple-example---binary-outcome.html#cb26-9" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>x_lab <span class="ot">&lt;-</span> <span class="fu">paste0</span>(predictions<span class="sc">$</span>rown,<span class="st">&quot;.&quot;</span>,predictions<span class="sc">$</span>x)</span>
+<span id="cb26-10"><a href="simple-example---binary-outcome.html#cb26-10" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Men&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Men&quot;</span>, <span class="st">&quot;Women&quot;</span>))</span>
+<span id="cb26-11"><a href="simple-example---binary-outcome.html#cb26-11" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>ethnicity <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;Non White&quot;</span>, predictions<span class="sc">$</span>x), <span class="st">&quot;Non white&quot;</span>, <span class="st">&quot;White&quot;</span>))</span>
+<span id="cb26-12"><a href="simple-example---binary-outcome.html#cb26-12" aria-hidden="true" tabindex="-1"></a>    predictions<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;61+&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;61+&quot;</span>,</span>
+<span id="cb26-13"><a href="simple-example---binary-outcome.html#cb26-13" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;-50&quot;</span>, df<span class="sc">$</span>x), <span class="st">&quot;-50&quot;</span>,<span class="st">&quot;51-60&quot;</span>)))</span>
+<span id="cb26-14"><a href="simple-example---binary-outcome.html#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">jpeg</span>(<span class="st">&quot;img/plot.jpeg&quot;</span>,</span>
+<span id="cb26-15"><a href="simple-example---binary-outcome.html#cb26-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="st">&quot;500&quot;</span>)</span>
+<span id="cb26-16"><a href="simple-example---binary-outcome.html#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(predictions <span class="sc">%&gt;%</span> </span>
+<span id="cb26-17"><a href="simple-example---binary-outcome.html#cb26-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>predicted, <span class="at">y=</span><span class="fu">fct_reorder</span>(x,predicted,<span class="at">.fun=</span><span class="st">&#39;median&#39;</span>),</span>
+<span id="cb26-18"><a href="simple-example---binary-outcome.html#cb26-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> sex, <span class="at">linetype =</span> ethnicity))<span class="sc">+</span></span>
+<span id="cb26-19"><a href="simple-example---binary-outcome.html#cb26-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb26-20"><a href="simple-example---binary-outcome.html#cb26-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high, <span class="at">size =</span> age))<span class="sc">+</span></span>
+<span id="cb26-21"><a href="simple-example---binary-outcome.html#cb26-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">labs</span>( <span class="at">y =</span> <span class="st">&quot;Sratas&quot;</span>, </span>
+<span id="cb26-22"><a href="simple-example---binary-outcome.html#cb26-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb26-23"><a href="simple-example---binary-outcome.html#cb26-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="st">&quot;Sex Category&quot;</span>,</span>
+<span id="cb26-24"><a href="simple-example---binary-outcome.html#cb26-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linetype =</span> <span class="st">&quot;Ethnicity&quot;</span>,</span>
+<span id="cb26-25"><a href="simple-example---binary-outcome.html#cb26-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">size =</span> <span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb26-26"><a href="simple-example---binary-outcome.html#cb26-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Predicted values for living in a urban area&quot;</span>))<span class="sc">+</span></span>
+<span id="cb26-27"><a href="simple-example---binary-outcome.html#cb26-27" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb26-28"><a href="simple-example---binary-outcome.html#cb26-28" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>)))<span class="sc">+</span> </span>
+<span id="cb26-29"><a href="simple-example---binary-outcome.html#cb26-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_size_discrete</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>))</span>
+<span id="cb26-30"><a href="simple-example---binary-outcome.html#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 <pre><code>## png 
 ##   2</code></pre>
 <p><img src="img/plot.jpeg" /></p>
@@ -413,37 +485,37 @@ div.csl-indent {
 <div id="the-variance-change" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> The variance change<a href="simple-example---binary-outcome.html#the-variance-change" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To calculate the (additive) contribution of each category to the total variance, we can estimate the variance change when adjusting for this category. The Proportional Variance Change (PVC) when adjusting for all categories is the portion of ICC/VPC explained by additive effect. Therefore 100% - PVC is the part explained by an intersectional effect .</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="simple-example---binary-outcome.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models where we add each category one by one</span></span>
-<span id="cb29-2"><a href="simple-example---binary-outcome.html#cb29-2" aria-hidden="true" tabindex="-1"></a>m_gender <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
-<span id="cb29-3"><a href="simple-example---binary-outcome.html#cb29-3" aria-hidden="true" tabindex="-1"></a>m_ethnicity <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Ethnicity <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
-<span id="cb29-4"><a href="simple-example---binary-outcome.html#cb29-4" aria-hidden="true" tabindex="-1"></a>m_age <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Age_class <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
-<span id="cb29-5"><a href="simple-example---binary-outcome.html#cb29-5" aria-hidden="true" tabindex="-1"></a>m_full <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">+</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
-<span id="cb29-6"><a href="simple-example---binary-outcome.html#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="simple-example---binary-outcome.html#cb29-7" aria-hidden="true" tabindex="-1"></a>v_gender <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_gender)</span>
-<span id="cb29-8"><a href="simple-example---binary-outcome.html#cb29-8" aria-hidden="true" tabindex="-1"></a>v_ethnicity <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_ethnicity)</span>
-<span id="cb29-9"><a href="simple-example---binary-outcome.html#cb29-9" aria-hidden="true" tabindex="-1"></a>v_age <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_age)</span>
-<span id="cb29-10"><a href="simple-example---binary-outcome.html#cb29-10" aria-hidden="true" tabindex="-1"></a>v_full <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_full)</span>
-<span id="cb29-11"><a href="simple-example---binary-outcome.html#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="simple-example---binary-outcome.html#cb29-12" aria-hidden="true" tabindex="-1"></a>prop_gender <span class="ot">&lt;-</span> <span class="fu">round</span>(((v_null<span class="sc">$</span>var.random <span class="sc">-</span> v_gender<span class="sc">$</span>var.random) <span class="sc">/</span> v_null<span class="sc">$</span>var.random)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span>
-<span id="cb29-13"><a href="simple-example---binary-outcome.html#cb29-13" aria-hidden="true" tabindex="-1"></a>prop_gender <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(prop_gender), <span class="dv">0</span>, prop_gender)</span>
-<span id="cb29-14"><a href="simple-example---binary-outcome.html#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-15"><a href="simple-example---binary-outcome.html#cb29-15" aria-hidden="true" tabindex="-1"></a>prop_ethnicity <span class="ot">&lt;-</span> <span class="fu">round</span>(((v_null<span class="sc">$</span>var.random <span class="sc">-</span> v_ethnicity<span class="sc">$</span>var.random) <span class="sc">/</span> v_null<span class="sc">$</span>var.random)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span>
-<span id="cb29-16"><a href="simple-example---binary-outcome.html#cb29-16" aria-hidden="true" tabindex="-1"></a>prop_ethnicity <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(prop_ethnicity), <span class="dv">0</span>, prop_ethnicity)</span>
-<span id="cb29-17"><a href="simple-example---binary-outcome.html#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-18"><a href="simple-example---binary-outcome.html#cb29-18" aria-hidden="true" tabindex="-1"></a>prop_age <span class="ot">&lt;-</span> <span class="fu">round</span>(((v_null<span class="sc">$</span>var.random <span class="sc">-</span> v_age<span class="sc">$</span>var.random) <span class="sc">/</span> v_null<span class="sc">$</span>var.random)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span>
-<span id="cb29-19"><a href="simple-example---binary-outcome.html#cb29-19" aria-hidden="true" tabindex="-1"></a>prop_age <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(prop_age), <span class="dv">0</span>, prop_age)</span>
-<span id="cb29-20"><a href="simple-example---binary-outcome.html#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-21"><a href="simple-example---binary-outcome.html#cb29-21" aria-hidden="true" tabindex="-1"></a>prop_full <span class="ot">&lt;-</span> <span class="fu">round</span>(((v_null<span class="sc">$</span>var.random <span class="sc">-</span> v_full<span class="sc">$</span>var.random) <span class="sc">/</span> v_null<span class="sc">$</span>var.random)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span>
-<span id="cb29-22"><a href="simple-example---binary-outcome.html#cb29-22" aria-hidden="true" tabindex="-1"></a>prop_full <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(prop_full), <span class="dv">100</span>, prop_full)</span>
-<span id="cb29-23"><a href="simple-example---binary-outcome.html#cb29-23" aria-hidden="true" tabindex="-1"></a>prop_intersection <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">-</span> prop_full,<span class="dv">2</span>)</span>
-<span id="cb29-24"><a href="simple-example---binary-outcome.html#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-25"><a href="simple-example---binary-outcome.html#cb29-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-26"><a href="simple-example---binary-outcome.html#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(</span>
-<span id="cb29-27"><a href="simple-example---binary-outcome.html#cb29-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(</span>
-<span id="cb29-28"><a href="simple-example---binary-outcome.html#cb29-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cbind</span>(</span>
-<span id="cb29-29"><a href="simple-example---binary-outcome.html#cb29-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">parameters =</span> <span class="fu">c</span>(<span class="st">&quot;ICC/VPC&quot;</span>, <span class="st">&quot;% Sex category&quot;</span>, <span class="st">&quot;% Age/generation&quot;</span>, <span class="st">&quot;% Ethnicity&quot;</span>, <span class="st">&quot;%Intersection&quot;</span>),</span>
-<span id="cb29-30"><a href="simple-example---binary-outcome.html#cb29-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(ICC_intersect,prop_gender, prop_age, prop_ethnicity,prop_intersection )</span>
-<span id="cb29-31"><a href="simple-example---binary-outcome.html#cb29-31" aria-hidden="true" tabindex="-1"></a>  )))</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="simple-example---binary-outcome.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models where we add each category one by one</span></span>
+<span id="cb28-2"><a href="simple-example---binary-outcome.html#cb28-2" aria-hidden="true" tabindex="-1"></a>m_gender <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
+<span id="cb28-3"><a href="simple-example---binary-outcome.html#cb28-3" aria-hidden="true" tabindex="-1"></a>m_ethnicity <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Ethnicity <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
+<span id="cb28-4"><a href="simple-example---binary-outcome.html#cb28-4" aria-hidden="true" tabindex="-1"></a>m_age <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Age_class <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
+<span id="cb28-5"><a href="simple-example---binary-outcome.html#cb28-5" aria-hidden="true" tabindex="-1"></a>m_full <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Urban <span class="sc">~</span> Age_class <span class="sc">+</span> Ethnicity <span class="sc">+</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> strata), <span class="at">data =</span> mydata, <span class="at">family=</span>binomial)</span>
+<span id="cb28-6"><a href="simple-example---binary-outcome.html#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="simple-example---binary-outcome.html#cb28-7" aria-hidden="true" tabindex="-1"></a>v_gender <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_gender)</span>
+<span id="cb28-8"><a href="simple-example---binary-outcome.html#cb28-8" aria-hidden="true" tabindex="-1"></a>v_ethnicity <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_ethnicity)</span>
+<span id="cb28-9"><a href="simple-example---binary-outcome.html#cb28-9" aria-hidden="true" tabindex="-1"></a>v_age <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_age)</span>
+<span id="cb28-10"><a href="simple-example---binary-outcome.html#cb28-10" aria-hidden="true" tabindex="-1"></a>v_full <span class="ot">&lt;-</span> <span class="fu">get_variance</span>(m_full)</span>
+<span id="cb28-11"><a href="simple-example---binary-outcome.html#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="simple-example---binary-outcome.html#cb28-12" aria-hidden="true" tabindex="-1"></a>prop_gender <span class="ot">&lt;-</span> <span class="fu">round</span>(((v_null<span class="sc">$</span>var.random <span class="sc">-</span> v_gender<span class="sc">$</span>var.random) <span class="sc">/</span> v_null<span class="sc">$</span>var.random)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span>
+<span id="cb28-13"><a href="simple-example---binary-outcome.html#cb28-13" aria-hidden="true" tabindex="-1"></a>prop_gender <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(prop_gender), <span class="dv">0</span>, prop_gender)</span>
+<span id="cb28-14"><a href="simple-example---binary-outcome.html#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="simple-example---binary-outcome.html#cb28-15" aria-hidden="true" tabindex="-1"></a>prop_ethnicity <span class="ot">&lt;-</span> <span class="fu">round</span>(((v_null<span class="sc">$</span>var.random <span class="sc">-</span> v_ethnicity<span class="sc">$</span>var.random) <span class="sc">/</span> v_null<span class="sc">$</span>var.random)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span>
+<span id="cb28-16"><a href="simple-example---binary-outcome.html#cb28-16" aria-hidden="true" tabindex="-1"></a>prop_ethnicity <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(prop_ethnicity), <span class="dv">0</span>, prop_ethnicity)</span>
+<span id="cb28-17"><a href="simple-example---binary-outcome.html#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="simple-example---binary-outcome.html#cb28-18" aria-hidden="true" tabindex="-1"></a>prop_age <span class="ot">&lt;-</span> <span class="fu">round</span>(((v_null<span class="sc">$</span>var.random <span class="sc">-</span> v_age<span class="sc">$</span>var.random) <span class="sc">/</span> v_null<span class="sc">$</span>var.random)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span>
+<span id="cb28-19"><a href="simple-example---binary-outcome.html#cb28-19" aria-hidden="true" tabindex="-1"></a>prop_age <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(prop_age), <span class="dv">0</span>, prop_age)</span>
+<span id="cb28-20"><a href="simple-example---binary-outcome.html#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-21"><a href="simple-example---binary-outcome.html#cb28-21" aria-hidden="true" tabindex="-1"></a>prop_full <span class="ot">&lt;-</span> <span class="fu">round</span>(((v_null<span class="sc">$</span>var.random <span class="sc">-</span> v_full<span class="sc">$</span>var.random) <span class="sc">/</span> v_null<span class="sc">$</span>var.random)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span>
+<span id="cb28-22"><a href="simple-example---binary-outcome.html#cb28-22" aria-hidden="true" tabindex="-1"></a>prop_full <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(prop_full), <span class="dv">100</span>, prop_full)</span>
+<span id="cb28-23"><a href="simple-example---binary-outcome.html#cb28-23" aria-hidden="true" tabindex="-1"></a>prop_intersection <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">-</span> prop_full,<span class="dv">2</span>)</span>
+<span id="cb28-24"><a href="simple-example---binary-outcome.html#cb28-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-25"><a href="simple-example---binary-outcome.html#cb28-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-26"><a href="simple-example---binary-outcome.html#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(</span>
+<span id="cb28-27"><a href="simple-example---binary-outcome.html#cb28-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(</span>
+<span id="cb28-28"><a href="simple-example---binary-outcome.html#cb28-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cbind</span>(</span>
+<span id="cb28-29"><a href="simple-example---binary-outcome.html#cb28-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">parameters =</span> <span class="fu">c</span>(<span class="st">&quot;ICC/VPC&quot;</span>, <span class="st">&quot;% Sex category&quot;</span>, <span class="st">&quot;% Age/generation&quot;</span>, <span class="st">&quot;% Ethnicity&quot;</span>, <span class="st">&quot;%Intersection&quot;</span>),</span>
+<span id="cb28-30"><a href="simple-example---binary-outcome.html#cb28-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(ICC_intersect,prop_gender, prop_age, prop_ethnicity,prop_intersection )</span>
+<span id="cb28-31"><a href="simple-example---binary-outcome.html#cb28-31" aria-hidden="true" tabindex="-1"></a>  )))</span></code></pre></div>
 <pre><code>##         parameters values
 ## 1          ICC/VPC  17.79
 ## 2   % Sex category   0.06

@@ -7,13 +7,34 @@ As a working example, we want to explore intersectional inequalities in life pla
 
 We can start by describe the outcome by strata.
 
-```{r message=FALSE, warning=FALSE}
 
-table1::table1(~ Sex + Age_class + Ethnicity | Urban,
-       data=mydata,
-           row_wise = TRUE,
-overall=c(left="Total"),
-    caption="Description by life place")
+```{r  ,echo=F,  results='asis' , message = FALSE, warning=FALSE,  fig.pos = "H" }
+library(finalfit)
+library(knitr)
+library(kableExtra)
+dependent="Urban"
+expl= c("Sex", 
+        "Age_class", 
+         "Ethnicity")
+
+mydata %>%
+  summary_factorlist(dependent, expl, 
+                                 column = FALSE, 
+                                 total_col = FALSE,
+                                 add_row_total = TRUE,
+                                 digits = c(2,1,3,2,0),
+                                 na_include = FALSE,
+                                 na_to_p = FALSE, na_to_prop = FALSE,
+                                 include_row_missing_col = FALSE,
+                                 add_col_totals = TRUE) -> t9
+
+t9 %>%  
+   kable(row.names=FALSE,
+       booktabs = T,
+       linesep = "",
+       align=c("l", "r", "l", "r", "r")) -> t9
+  kable_styling(t9, font_size = 8, 
+                latex_options = "hold_position") 
 
 ```
 
